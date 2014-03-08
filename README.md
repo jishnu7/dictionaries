@@ -10,6 +10,7 @@ Each word has a priority between 15 and 254.
 Languages
 --------
 * Bengali
+* Gujarati
 * Hindi
 * Kannada
 * Malayalam
