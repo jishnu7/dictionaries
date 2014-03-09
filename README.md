@@ -14,6 +14,7 @@ Languages
 * Hindi
 * Kannada
 * Malayalam
+* Punjabi
 * Tamil
 * Telugu
 
