@@ -26,6 +26,7 @@ sub is_integer { $_[0] =~ /^[+-]?\d+$/ }
 # Re-open the source file and update the weight
 open FILE, "<:encoding(utf8)", $ARGV[0] or die $!;
 
+# remove ’, “, ।, —, ‘, ·, −, °, ”, ॥
 while (my $line = <FILE>) {
     $count--;
 
