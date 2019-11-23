@@ -9,14 +9,23 @@ Each word has a priority between 15 and 254.
 
 Languages
 --------
+* Assamese
 * Bengali
 * Gujarati
 * Hindi
 * Kannada
+* Konkani
+* Kashmiri
+* Maithili
 * Malayalam
+* Odia
 * Punjabi
+* Sanskrit
+* Sindhi
 * Tamil
 * Telugu
+* Tulu
+* Urudu
 
 License
 --------
