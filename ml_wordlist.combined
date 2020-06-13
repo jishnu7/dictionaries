@@ -348,7 +348,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സംവിധായകൻ,f=252
  word=നിലവിൽ,f=252
  word=പടിഞ്ഞാറ്,f=252
- word=വിക്കിപീഡിയയില്‍,f=252
+ word=വിക്കിപീഡിയയിൽ,f=252
  word=ഇങ്ങനെ,f=252
  word=നഗരം,f=252
  word=ചിത്രശാല,f=252
@@ -564,7 +564,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=വിൻഡോസ്,f=251
  word=കാര്യങ്ങൾ,f=251
  word=വിമാനത്താവളം,f=251
- word=താങ്കള്‍ക്ക്,f=251
+ word=താങ്കൾക്ക്,f=251
  word=അഭിപ്രായം,f=251
  word=കാൽ,f=251
  word=ചിത്ര,f=251
@@ -1077,7 +1077,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഫയൽ,f=248
  word=പേർഷ്യൻ,f=248
  word=നാടകങ്ങൾ,f=248
- word=വിസ്തീര്‍ണ്ണം,f=248
+ word=വിസ്തീർണ്ണം,f=248
  word=മുകേഷ്,f=248
  word=ജാനകി,f=248
  word=എസ്‌,f=248
@@ -1208,7 +1208,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പറഞ്ഞു,f=248
  word=കുഞ്ചാക്കോ,f=248
  word=ശരീരം,f=248
- word=ലേഖനങ്ങള്‍,f=248
+ word=ലേഖനങ്ങൾ,f=248
  word=രാമൻ,f=248
  word=നഗരത്തിൽ,f=248
  word=ഗ്രിഗോറിയൻ,f=248
@@ -1232,7 +1232,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=അളവ്,f=248
  word=ഹൌസ്,f=248
  word=ഭരണസ്ഥാപനങ്ങൾ,f=248
- word=മലയാളത്തില്‍,f=248
+ word=മലയാളത്തിൽ,f=248
  word=രാജീവ്,f=248
  word=നഗരത്തിന്റെ,f=248
  word=ഉയരത്തിൽ,f=248
@@ -1269,7 +1269,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=വിഭാഗത്തിൽ,f=247
  word=തുടങ്ങുവാനോ,f=247
  word=തിരഞ്ഞെടുത്തു,f=247
- word=താങ്കള്‍,f=247
+ word=താങ്കൾ,f=247
  word=ഒരിക്കൽ,f=247
  word=ലഭിച്ചത്,f=247
  word=തിരഞ്ഞെടുക്കാവുന്ന,f=247
@@ -1315,7 +1315,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഗുണങ്ങൾ,f=247
  word=കുറച്ചു,f=247
  word=വ്യക്തികൾ,f=247
- word=ലേഖനങ്ങളെഴുതുവാന്‍,f=247
+ word=ലേഖനങ്ങളെഴുതുവാൻ,f=247
  word=ജില്ലയുടെ,f=247
  word=ക്ഷേത്രത്തിന്റെ,f=247
  word=ആവശ്യമുണ്ടോ,f=247
@@ -1367,7 +1367,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പ്രത്യേകത,f=247
  word=ചോദ്യം,f=247
  word=കാർബൺ,f=247
- word=പങ്കാളിയാകാന്‍,f=247
+ word=പങ്കാളിയാകാൻ,f=247
  word=കഥകളി,f=247
  word=ശൈലി,f=247
  word=വർഷത്തിലെ,f=247
@@ -5127,7 +5127,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഇൻഫർമേഷൻ,f=229
  word=അശ്വതി,f=229
  word=അലഹബാദ്,f=229
- word=അൽ‍,f=229
+ word=അൽ,f=229
  word=റയൽ,f=229
  word=സൊസൈറ്റിയുടെ,f=229
  word=സൃഷ്ടിക്കുന്നു,f=229
@@ -5316,7 +5316,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=നാടകങ്ങളും,f=228
  word=നയിച്ച,f=228
  word=തേയില,f=228
- word=തളിപ്പറമ്പ്‍,f=228
+ word=തളിപ്പറമ്പ്,f=228
  word=തടയാൻ,f=228
  word=ട്രാക്ക്,f=228
  word=ക്യൂബൻ,f=228
@@ -5530,7 +5530,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=അടക്കമുള്ള,f=227
  word=അഞ്ചാമത്തെ,f=227
  word=സ്വിറ്റ്സർലാന്റ്,f=227
- word=സെപ്റ്റംബര്‍,f=227
+ word=സെപ്റ്റംബർ,f=227
  word=സമവായം,f=227
  word=സമരങ്ങൾ,f=227
  word=ശുദ്ധ,f=227
@@ -6152,7 +6152,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ചിലതാണ്,f=224
  word=ചന്തു,f=224
  word=ഗേൾസ്,f=224
- word=ഗംഗാധര‍,f=224
+ word=ഗംഗാധര,f=224
  word=ക്ലിക്ക്,f=224
  word=കൗൺസിലിന്റെ,f=224
  word=കൊന്നു,f=224
@@ -6250,7 +6250,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=തോന്നുന്ന,f=223
  word=തേക്ക്,f=223
  word=തുടങ്ങും,f=223
- word=താളുകൾ‍,f=223
+ word=താളുകൾ,f=223
  word=തവിട്ട്,f=223
  word=ജൈനമതം,f=223
  word=ജീവിക്കാൻ,f=223
@@ -10282,7 +10282,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഭാഗത്തേക്ക്,f=204
  word=ഭരതന്റെ,f=204
  word=ഭയന്ന്,f=204
- word=ബ്ലുമാൻ‍ഗോ,f=204
+ word=ബ്ലുമാൻഗോ,f=204
  word=ബന്ധവും,f=204
  word=ഫെമിന,f=204
  word=പ്ലൂട്ടോ,f=204
@@ -13431,7 +13431,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=യൂറോപ്യന്മാർ,f=189
  word=യൂറോപ്പ,f=189
  word=മോളി,f=189
- word=മോഹൻ‍ദാസ്,f=189
+ word=മോഹൻദാസ്,f=189
  word=മൊറാർജി,f=189
  word=മൊത്തമായി,f=189
  word=മുസ്ലിയാർ,f=189
@@ -13816,7 +13816,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ജന്മഭൂമി,f=187
  word=ജനിച്ചത്‌,f=187
  word=ജനയുഗം,f=187
- word=ചോദിക്കാന്‍,f=187
+ word=ചോദിക്കാൻ,f=187
  word=ചേർക്കുമ്പോൾ,f=187
  word=ചെറുകഥക്കുള്ള,f=187
  word=ചെളി,f=187
@@ -14168,13 +14168,13 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഉപയോഗിക്കാറില്ല,f=185
  word=ഉപഭോഗം,f=185
  word=ഉപനിഷത്ത്,f=185
- word=ഉത്തരങ്ങള്‍,f=185
+ word=ഉത്തരങ്ങൾ,f=185
  word=ഈയിനം,f=185
  word=ഇളനീർ,f=185
  word=ഇസ്താംബുൾ,f=185
  word=ഇരുപത്തി,f=185
  word=ഇരയിമ്മൻ,f=185
- word=ഇനിയുമുണ്ടെങ്കില്‍,f=185
+ word=ഇനിയുമുണ്ടെങ്കിൽ,f=185
  word=ഇതുകൊണ്ട്,f=185
  word=ഇതിനുള്ളത്,f=185
  word=ഇടത്തേ,f=185
@@ -14548,7 +14548,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=വാൽനക്ഷത്രം,f=183
  word=വഴിയൊരുക്കി,f=183
  word=വവ്വാൽ,f=183
- word=വര‍ച്ച,f=183
+ word=വരച്ച,f=183
  word=വയറിളക്കം,f=183
  word=വർത്തമാനം,f=183
  word=വടക്കുംകൂർ,f=183
@@ -16561,7 +16561,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=അഷ്ടമിച്ചിറ,f=174
  word=അവശിഷ്ടം,f=174
  word=അൻ‌വർ,f=174
- word=അമ്മ‍,f=174
+ word=അമ്മ,f=174
  word=അംഗോള,f=174
  word=അഭിലാഷ്,f=174
  word=അഭിമാനം,f=174
@@ -18026,7 +18026,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഭാഗമാണിത്,f=167
  word=ബ്രസീലിന്റെ,f=167
  word=ബോട്സ്വാന,f=167
- word=ബോക്സില്‍,f=167
+ word=ബോക്സിൽ,f=167
  word=ബെൽറ്റ്,f=167
  word=ബെറിലിയം,f=167
  word=ബീഹാറിലെ,f=167
@@ -18473,7 +18473,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ബാങ്ക്‌,f=164
  word=ബഹുഭൂരിപക്ഷം,f=164
  word=ബഞ്ചമിൻ,f=164
- word=ബർഗ്‍മൻ,f=164
+ word=ബർഗ്മൻ,f=164
  word=ഫ്രൈഡേ,f=164
  word=ഫ്യൂഡൽ,f=164
  word=ഫിലിപ്പീൻ,f=164
@@ -19050,7 +19050,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=നാടുകടത്തി,f=162
  word=നാടകങ്ങളാണ്,f=162
  word=നാടകങ്ങൾക്ക്,f=162
- word=നവംബർ‍,f=162
+ word=നവംബർ,f=162
  word=നദീതടം,f=162
  word=നത്ത്,f=162
  word=നടപ്പാക്കുന്നത്,f=162
@@ -21137,7 +21137,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സംസാര,f=152
  word=സംശോധനം,f=152
  word=സംരക്ഷിച്ചു,f=152
- word=സം‍രക്ഷണം,f=152
+ word=സംരക്ഷണം,f=152
  word=സംഭാവനകളാണ്,f=152
  word=സമ്പ്രദായത്തെ,f=152
  word=സമീപത്താണ്,f=152
@@ -21332,7 +21332,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പേശികളുടെ,f=151
  word=പേരെങ്കിലും,f=151
  word=പേട്ട,f=151
- word=പേജ്‍,f=151
+ word=പേജ്,f=151
  word=പെൻ‌സിൽ‌വാനിയ,f=151
  word=പെരുവന്താനം,f=151
  word=പെരും,f=151
@@ -22216,7 +22216,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ജയാനൻ,f=146
  word=ജയന്റ്,f=146
  word=ജംഇയ്യത്തുൽ,f=146
- word=ജനുവരി‍‍‍‍‍,f=146
+ word=ജനുവരി,f=146
  word=ജഡേജ,f=146
  word=ഛിന്നഗ്രഹങ്ങൾ,f=146
  word=ഛായാഗ്രഹണ,f=146
@@ -22898,7 +22898,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ജ്യോതിർലിംഗങ്ങൾ,f=143
  word=ജോസഫിന്റെ,f=143
  word=ജോർജസ്,f=143
- word=ജൂലൈ‍,f=143
+ word=ജൂലൈ,f=143
  word=ജീവിതാന്ത്യം,f=143
  word=ജീവിതവുമായി,f=143
  word=ജീവിതത്തിനു,f=143
@@ -23028,8 +23028,8 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഓഹരിവിപണി,f=142
  word=ഓഷ്യാനിയയിലെ,f=142
  word=ഓയ്ലർ,f=142
- word=ഓഗസ്റ്റ്‍‍‍‍‍‍,f=142
- word=ഓഗസ്റ്റ്‍‍‍‍‍,f=142
+ word=ഓഗസ്റ്റ്,f=142
+ word=ഓഗസ്റ്റ്,f=142
  word=ഒറ്റപ്പെട്ടു,f=142
  word=ഒഴിവാക്കാവുന്ന,f=142
  word=ഒഴിക്കുക,f=142
@@ -23388,7 +23388,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=മൊഹാലി,f=141
  word=മൊത്ത,f=141
  word=മൈക്കലാഞ്ചലോ,f=141
- word=മേയ്‍‍‍‍‍,f=141
+ word=മേയ്,f=141
  word=മേഖലയാണ്‌,f=141
  word=മെലീസ്,f=141
  word=മെയിലിങ്ങ്,f=141
@@ -23692,7 +23692,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഡോബർമാൻ,f=139
  word=ഡെഫനിഷൻ,f=139
  word=ഡീപ്പ്,f=139
- word=ഡിസംബർ‍‍,f=139
+ word=ഡിസംബർ,f=139
  word=ഡിഗ്രീ,f=139
  word=ഡിക്ക്,f=139
  word=ഡാലിയൻ,f=139
@@ -23703,13 +23703,13 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഞെക്കി,f=139
  word=ഞാറ്റുവേല,f=139
  word=ഞാറക്കൽ,f=139
- word=ഞാന്‍,f=139
+ word=ഞാൻ,f=139
  word=ജോർദ്ദാൻ,f=139
  word=ജൈനക്ഷേത്രം,f=139
  word=ജെയ്ൻ,f=139
  word=ജെന്റു,f=139
- word=ജൂലൈ‍‍‍‍‍‍,f=139
- word=ജൂലൈ‍‍‍,f=139
+ word=ജൂലൈ,f=139
+ word=ജൂലൈ,f=139
  word=ജീവിതത്തിലേക്ക്,f=139
  word=ജീപ്പ്,f=139
  word=ജീനുകളുടെ,f=139
@@ -24091,7 +24091,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സെല്ലുകൾ,f=137
  word=സെമിനാർ,f=137
  word=സെമിത്തേരി,f=137
- word=സെപ്റ്റംബർ‍,f=137
+ word=സെപ്റ്റംബർ,f=137
  word=സെപ്തംബറിൽ,f=137
  word=സെക്സ്,f=137
  word=സൃഷ്ടിക്കുവാൻ,f=137
@@ -24295,7 +24295,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=മോട്ടോറോള,f=136
  word=മൊഹീന്ദർ,f=136
  word=മൈക്കെലാഞ്ജലോ,f=136
- word=മേയ്‍‍‍‍‍‍,f=136
+ word=മേയ്,f=136
  word=മെസേജ്,f=136
  word=മൃദുവും,f=136
  word=മൂടുപടം,f=136
@@ -24539,7 +24539,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=നാടകത്തെ,f=135
  word=നശിപ്പിക്കപ്പെട്ടു,f=135
  word=നവോത്ഥാനകാല,f=135
- word=നവംബർ‍‍‍‍,f=135
+ word=നവംബർ,f=135
  word=നല്ലപോലെ,f=135
  word=നയപരമായ,f=135
  word=നമ്പൂതിരിയെ,f=135
@@ -24633,8 +24633,8 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ജോർജ്ജിന്റെ,f=135
  word=ജേർണൽ,f=135
  word=ജെറമിയായുടെ,f=135
- word=ജൂൺ‍‍‍‍‍,f=135
- word=ജൂൺ‍‍‍‍,f=135
+ word=ജൂൺ,f=135
+ word=ജൂൺ,f=135
  word=ജീവിതകഥ,f=135
  word=ജില്ലയ്ക്ക്,f=135
  word=ജാമുൻ,f=135
@@ -24643,7 +24643,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ജാർഖണ്ഡ്,f=135
  word=ജലാശയം,f=135
  word=ജന്മനാ,f=135
- word=ജന്മദേശമായി‍ട്ടുള്ള,f=135
+ word=ജന്മദേശമായിട്ടുള്ള,f=135
  word=ജന്തുക്കളും,f=135
  word=ജനുസ്സുകൾ‎,f=135
  word=ചോളമണ്ഡലം,f=135
@@ -24860,7 +24860,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഉന്നയിച്ച,f=134
  word=ഉദ്ദേശിച്ചുള്ള,f=134
  word=ഉദരത്തിൽ,f=134
- word=ഉദയം‍പേരൂർ,f=134
+ word=ഉദയംപേരൂർ,f=134
  word=ഉത്സവത്തിൽ,f=134
  word=ഉത്സവങ്ങളിൽ,f=134
  word=ഉത്പാദനത്തിന്റെ,f=134
@@ -24873,7 +24873,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഉച്ചത,f=134
  word=ഈവ,f=134
  word=ഈട്ടി,f=134
- word=ഈ‍,f=134
+ word=ഈ,f=134
  word=ഇറിഡിയം,f=134
  word=ഇൻറർനാഷണൽ,f=134
  word=ഇസ്,f=134
@@ -25514,7 +25514,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=നിർമ്മിക്കപ്പെടുന്ന,f=130
  word=നിമ്മി,f=130
  word=നിർബന്ധിതരായി,f=130
- word=നിന്നും‍,f=130
+ word=നിന്നും,f=130
  word=നിന്നുതന്നെ,f=130
  word=നിർദ്ദേശിക്കുകയും,f=130
  word=നിങ്ങളെന്നെ,f=130
@@ -25530,7 +25530,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=നശീകരണം,f=130
  word=നവംബറിലെ,f=130
  word=നല്ലേപ്പിള്ളി,f=130
- word=നല്‍കുക,f=130
+ word=നൽകുക,f=130
  word=നയ്സ്,f=130
  word=നയീ,f=130
  word=നമ്പൂതിരിമാരുടെ,f=130
@@ -28246,7 +28246,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സ്ഥാനാർത്ഥികൾ,f=117
  word=സ്ഥാനമുള്ള,f=117
  word=സ്ഥലത്തുനിന്നും,f=117
- word=സ്ക്രീന്‍ഷോട്ട്,f=117
+ word=സ്ക്രീൻഷോട്ട്,f=117
  word=സ്കോട്ട്ലൻഡ്,f=117
  word=സ്കൊളാസ്റ്റിസിസം,f=117
  word=സ്കൈലൈൻ,f=117
@@ -28258,7 +28258,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സെസിൽ,f=117
  word=സെല്യൂസിദ്,f=117
  word=സെല്യൂക്കസ്,f=117
- word=സെപ്റ്റംബർ‍‍‍‍‍,f=117
+ word=സെപ്റ്റംബർ,f=117
  word=സെന്റീ,f=117
  word=സെനോൺ,f=117
  word=സെനഗൽ,f=117
@@ -28671,7 +28671,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പ്രയാസമുള്ള,f=115
  word=പ്രഭാത്,f=115
  word=പ്രഫ,f=115
- word=പ്രധാ‍ന,f=115
+ word=പ്രധാന,f=115
  word=പ്രദർശിപ്പിക്കാൻ,f=115
  word=പ്രത്യേകതയായിരുന്നു,f=115
  word=പ്രത്യക്ഷപ്പെടും,f=115
@@ -28962,7 +28962,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ജൂതപ്പള്ളി,f=114
  word=ജുബൈൽ,f=114
  word=ജീവിതശൈലി,f=114
- word=ജീ‍വിതം,f=114
+ word=ജീവിതം,f=114
  word=ജീവിതനിലവാരം,f=114
  word=ജീവധാതുക്കൾ,f=114
  word=ജില്ലയിലൂടെ,f=114
@@ -29272,7 +29272,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഇല്ലൈ,f=112
  word=ഇരുവശവും,f=112
  word=ഇരിക്കുക,f=112
- word=ഇമെയിൽ‍,f=112
+ word=ഇമെയിൽ,f=112
  word=ഇത്തിത്താനം,f=112
  word=ഇതിനോടനുബന്ധിച്ച്,f=112
  word=ഇതിനെയാണ്,f=112
@@ -29468,7 +29468,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സൈസ്,f=111
  word=സേർ,f=111
  word=സെർവറിൽ,f=111
- word=സെപ്റ്റംബർ‍‍‍,f=111
+ word=സെപ്റ്റംബർ,f=111
  word=സെപ്പറേഷൻ,f=111
  word=സെഞ്ചുറി,f=111
  word=സെക്രട്ടറിയായിരുന്ന,f=111
@@ -30624,7 +30624,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ആകാശഗോപുരം,f=106
  word=ആകാരം,f=106
  word=ആകർഷിക്കുന്നത്,f=106
- word=ആർ‍,f=106
+ word=ആർ,f=106
  word=അറോൺഹാൻ,f=106
  word=അറിവുകളും,f=106
  word=അഴിയൂർ,f=106
@@ -30791,7 +30791,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സെറാമിക്,f=105
  word=സെലക്ഷൻ,f=105
  word=സെയ്ഷെൽസ്,f=105
- word=സെപ്റ്റംബർ‍‍,f=105
+ word=സെപ്റ്റംബർ,f=105
  word=സെന്നിന്റെ,f=105
  word=സൃഷ്ടിക്കാനുള്ള,f=105
  word=സൃഷ്ടിക്കപ്പെട്ടു,f=105
@@ -31875,7 +31875,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=കനകക്കുന്ന്,f=100
  word=കഥാപാത്രമാണ്‌,f=100
  word=കഥയെഴുതുകയാണ്,f=100
- word=കണ്ണികൾ‍,f=100
+ word=കണ്ണികൾ,f=100
  word=കണ്ണമാലി,f=100
  word=കണ്ടെത്തിയതോടെ,f=100
  word=കണ്ടെത്താനായില്ല,f=100
@@ -32281,7 +32281,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സംശയിക്കപ്പെടുന്നവർ,f=98
  word=സംവിധായക,f=98
  word=സംരംഭമാണ്,f=98
- word=സംരംഭത്തില്‍,f=98
+ word=സംരംഭത്തിൽ,f=98
  word=സംയുക്തമാണ്,f=98
  word=സമ്മാനങ്ങളും,f=98
  word=സമ്മതിക്കുകയും,f=98
@@ -32577,7 +32577,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=മുട്ടയും,f=96
  word=മുൻകാലത്ത്,f=96
  word=മുകളിലേക്കുള്ള,f=96
- word=മുകളില്‍,f=96
+ word=മുകളിൽ,f=96
  word=മീഥെയ്ൻ,f=96
  word=മിറാൻഡ,f=96
  word=മിശ്രിത,f=96
@@ -32896,7 +32896,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പാർപ്പിച്ചു,f=95
  word=പാപനാശിനി,f=95
  word=പാദങ്ങളിൽ,f=95
- word=പാത്രിയർ‍ക്കീസ്,f=95
+ word=പാത്രിയർക്കീസ്,f=95
  word=പാൻഡ,f=95
  word=പാഠ്യേതര,f=95
  word=പാർട്ടിയാണ്,f=95
@@ -33078,13 +33078,13 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=തുറന്നത്,f=94
  word=തുല്യമാണെങ്കിൽ,f=94
  word=തുണികൾ,f=94
- word=തുടർ‍ന്ന്,f=94
+ word=തുടർന്ന്,f=94
  word=തുടങ്ങിയവയുമായി,f=94
  word=തുഞ്ചൻ,f=94
  word=തുർഗുത്,f=94
  word=തുർക്‌മെനിസ്ഥാൻ,f=94
  word=തുകയാണ്,f=94
- word=തീര്‍ച്ചയായും,f=94
+ word=തീർച്ചയായും,f=94
  word=തീരൂ,f=94
  word=തീർഥാടനം,f=94
  word=തീക്കനൽ,f=94
@@ -33227,7 +33227,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ചിന്താവിഷ്ടയായ,f=93
  word=ചിന്തകന്മാർ,f=93
  word=ചിത്രീകരിക്കാൻ,f=93
- word=ചിത്രശാ‍ല,f=93
+ word=ചിത്രശാല,f=93
  word=ചിത്രത്തിലുള്ളത്,f=93
  word=ചിത്രങ്ങളോ,f=93
  word=ചിത്തരഞ്ജൻ,f=93
@@ -34181,7 +34181,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ലഘുലേഖകൾ,f=89
  word=ലക്ഷ്യസ്ഥാനത്ത്,f=89
  word=ലക്ഷ്മണനും,f=89
- word=രേഖപ്പെടുത്താന്‍,f=89
+ word=രേഖപ്പെടുത്താൻ,f=89
  word=രെജിസ്റ്റർ,f=89
  word=രൂപീകരിച്ചപ്പോൾ,f=89
  word=രൂപവത്കരിക്കപ്പെട്ട,f=89
@@ -34211,7 +34211,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=യൂറോപ്പിനെ,f=89
  word=യൂറി,f=89
  word=യൂസെർ,f=89
- word=യൂസര്‍,f=89
+ word=യൂസർ,f=89
  word=യൂണിറ്റിന്റെ,f=89
  word=യൂണിവേഴ്‌സിറ്റിയിൽ,f=89
  word=യൂണിഫോം,f=89
@@ -34522,7 +34522,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പേർഷ്യയുടെ,f=87
  word=പേരുകളുള്ള,f=87
  word=പേരിട്ടിരിക്കുന്നത്,f=87
- word=പേജില്‍,f=87
+ word=പേജിൽ,f=87
  word=പേക്കാന്തവള,f=87
  word=പെറുവിൽ,f=87
  word=പെരുമ്പിലാവ്,f=87
@@ -34590,7 +34590,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പാഠകം,f=87
  word=പാട്രിക്ക്,f=87
  word=പാട്ടുകാരൻ,f=87
- word=പാർ‍ട്ടി,f=87
+ word=പാർട്ടി,f=87
  word=പറന്ന,f=87
  word=പഴുത്ത്,f=87
  word=പഴവങ്ങാടി,f=87
@@ -34718,7 +34718,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=നിർണയിക്കുന്നതിൽ,f=86
  word=നിജസ്ഥിതി,f=86
  word=നിങ്ങളിൽ,f=86
- word=നിങ്ങള്‍,f=86
+ word=നിങ്ങൾ,f=86
  word=നിഘണ്ടുവിന്റെ,f=86
  word=നിൽക്കാനുള്ള,f=86
  word=നിൽക്കാനും,f=86
@@ -34973,7 +34973,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ജഅഫർ,f=85
  word=ഛായാഗ്രാഹകന്റെ,f=85
  word=ചോഴ,f=85
- word=ചോദ്യങ്ങള്‍ക്കും,f=85
+ word=ചോദ്യങ്ങൾക്കും,f=85
  word=ചൊല്ലുന്ന,f=85
  word=ചൊട്ടശലഭം,f=85
  word=ചേർത്താണ്‌,f=85
@@ -35420,7 +35420,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഇയാളുടെ,f=83
  word=ഇമേജിങ്,f=83
  word=ഇമിറ്റേഷൻ,f=83
- word=ഇപ്പോൾ‍,f=83
+ word=ഇപ്പോൾ,f=83
  word=ഇപോക്സി,f=83
  word=ഇന്ത്യയിലെയും,f=83
  word=ഇന്ത്യയിലാണ്‌,f=83
@@ -35455,7 +35455,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ആരംഭവും,f=83
  word=ആരംഭത്തിലും,f=83
  word=ആര,f=83
- word=ആയുർ‍വേദ,f=83
+ word=ആയുർവേദ,f=83
  word=ആയുർ,f=83
  word=ആയിരുന്നെങ്കിലും,f=83
  word=ആയിരിക്കുന്ന,f=83
@@ -35541,7 +35541,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=അഫ്രീഡി,f=82
  word=അഫോൻസോ,f=82
  word=അഫയേഴ്സ്,f=82
- word=അപ്പോള്‍,f=82
+ word=അപ്പോൾ,f=82
  word=അപ്പോസ്തോലിക,f=82
  word=അപ്പോസൈനേസീ,f=82
  word=അപ്പൂട്ടൻ,f=82
@@ -36094,7 +36094,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=രാഷ്ട്രതന്ത്രജ്ഞൻ,f=80
  word=രാമായണത്തെ,f=80
  word=രാമമൂർത്തി,f=80
- word=രാ‍മചന്ദ്രബാബു,f=80
+ word=രാമചന്ദ്രബാബു,f=80
  word=രാമകൃഷ്ണറാവു,f=80
  word=രാജ്യസഭാംഗം,f=80
  word=രാജ്ഞിയും,f=80
@@ -36606,7 +36606,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പക്ഷിക്ക്,f=77
  word=പക്ഷികളുടെയും,f=77
  word=പകുതിയിലധികം,f=77
- word=പകര്‍പ്പവകാശ,f=77
+ word=പകർപ്പവകാശ,f=77
  word=പകരുന്നു,f=77
  word=ന്യൂട്രോണുകളും,f=77
  word=ന്യൂട്രിനോകളുടെ,f=77
@@ -37377,7 +37377,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=എന്നിവക്കുള്ള,f=73
  word=എന്നിവക്കു,f=73
  word=എന്നാണറിയപ്പെട്ടിരുന്നത്,f=73
- word=എന്നാ‍ൽ,f=73
+ word=എന്നാൽ,f=73
  word=എന്നറിയപ്പെടാൻ,f=73
  word=എന്നതുപോലെ,f=73
  word=എന്നതിനെക്കുറിച്ച്,f=73
@@ -37601,7 +37601,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=അമേരിക്കയുമായി,f=72
  word=അമീർമാർ,f=72
  word=അമർദാസ്,f=72
- word=അബ്ദുൽ‍‍,f=72
+ word=അബ്ദുൽ,f=72
  word=അബിതിയെറ്റർ,f=72
  word=അബനീന്ദ്രനാഥ്,f=72
  word=അപ്പോളോഡോറസ്,f=72
@@ -39009,7 +39009,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=തിരിച്ചുവരുന്ന,f=66
  word=തിരികൾ,f=66
  word=തിരഞ്ഞെടുപ്പിലും,f=66
- word=തിരഞ്ഞെടുപ്പ്‍,f=66
+ word=തിരഞ്ഞെടുപ്പ്,f=66
  word=തിരഞ്ഞ്,f=66
  word=തിയ്യതികളിലേക്ക്,f=66
  word=തിങ്ങി,f=66
@@ -39216,7 +39216,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഗ്രീനിച്ച്,f=65
  word=ഗ്രിഗോരിയോസ്,f=65
  word=ഗ്രാംഷി,f=65
- word=ഗ്രാമങ്ങളാ‍ൽ,f=65
+ word=ഗ്രാമങ്ങളാൽ,f=65
  word=ഗ്രന്ഥാലയ,f=65
  word=ഗ്രന്ഥങ്ങൾക്ക്,f=65
  word=ഗൗരവമുള്ള,f=65
@@ -39776,7 +39776,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=അവർക്കുവേണ്ടി,f=62
  word=അവകാശപ്പെടാവുന്ന,f=62
  word=അവകലനം,f=62
- word=അവർ‍,f=62
+ word=അവർ,f=62
  word=അലിഭായ്,f=62
  word=അലാന്ദ്,f=62
  word=അലങ്കാരങ്ങളും,f=62
@@ -40339,7 +40339,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=വിശ്രമജീവിതം,f=59
  word=വിവേകദന്തങ്ങൾ,f=59
  word=വിവരിച്ചിരിക്കുന്ന,f=59
- word=വിവരങ്ങള്‍,f=59
+ word=വിവരങ്ങൾ,f=59
  word=വിവക്ഷിക്കുന്നു,f=59
  word=വിലയുടെ,f=59
  word=വിലങ്ങനെ,f=59
@@ -40969,7 +40969,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പോയിട്ടുണ്ട്,f=56
  word=പോപ്പിൻസ്,f=56
  word=പോർച്ചുഗീസുകാരാണ്,f=56
- word=പോർ‍ച്ചുഗലിലെ,f=56
+ word=പോർച്ചുഗലിലെ,f=56
  word=പോകേണ്ടി,f=56
  word=പോകുന്നതാണ്,f=56
  word=പൊറാട്ട്,f=56
@@ -42066,7 +42066,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഒമ്പതാമത്തെ,f=51
  word=ഒട്ടകങ്ങൾ,f=51
  word=ഒക്റ്റാവിയൻ,f=51
- word=ഒക്ടോബർ‍,f=51
+ word=ഒക്ടോബർ,f=51
  word=ഒക്ടാവിയോ,f=51
  word=ഐസോമെറിസം,f=51
  word=ഐസോപ്രീൻ,f=51
@@ -42380,7 +42380,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=അലക്സാൻഡ്രിയയിലെ,f=49
  word=അലക്സ,f=49
  word=അരുണ്ഡേൽ,f=49
- word=അരുണ‍,f=49
+ word=അരുണ,f=49
  word=അരവിന്ദാക്ഷമേനോൻ,f=49
  word=അരവിന്ദന്റെ,f=49
  word=അരയന്നങ്ങളുടെ,f=49
@@ -43816,7 +43816,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പിക്ക്,f=42
  word=പാറ്റഗോണിയ,f=42
  word=പാറ്റ്,f=42
- word=പാറമേ‍ക്കാവ്,f=42
+ word=പാറമേക്കാവ്,f=42
  word=പാസ്റ്റർ,f=42
  word=പാസേജ്,f=42
  word=പാവമണി,f=42
@@ -44044,7 +44044,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=നാരങ്ങാവെള്ളം,f=41
  word=നായികയുടെ,f=41
  word=നായർക്ക്,f=41
- word=നായർ‍,f=41
+ word=നായർ,f=41
  word=നാമെ,f=41
  word=നാണ്യവിളകൾ,f=41
  word=നാണയമാണ്,f=41
@@ -44350,7 +44350,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഞായപ്പിള്ളി,f=40
  word=ഞങ്ങൾക്കു,f=40
  word=ഝാർഖണ്ഡിലെ,f=40
- word=ഝാ‍ർഖണ്ഡ്‌,f=40
+ word=ഝാർഖണ്ഡ്‌,f=40
  word=ജ്യോതിശാസ്ത്രവും,f=40
  word=ജ്ഞാനത്തിന്റെ,f=40
  word=ജോസഫിനെ,f=40
@@ -45368,7 +45368,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=അധികമായും,f=35
  word=അദ്ധ്യായങ്ങളുടെ,f=35
  word=അദ്ദേഹത്തിനും,f=35
- word=അർ‌‍ഥത്തിൽ,f=35
+ word=അർ‌ഥത്തിൽ,f=35
  word=അത്യാവശ്യമായ,f=35
  word=അത്ഭുതങ്ങൾ,f=35
  word=അത്താസി,f=35
@@ -46875,7 +46875,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=പിൻചിറകിൻ,f=28
  word=പിഗ്സ്‌,f=28
  word=പിൻഗാമികളാണ്,f=28
- word=പിൻ‍ഗാമികൾ,f=28
+ word=പിൻഗാമികൾ,f=28
  word=പിക്കാസ,f=28
  word=പാറകളും,f=28
  word=പാറകളുടെ,f=28
@@ -47376,7 +47376,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=താളിലുള്ള,f=25
  word=താളിലാണ്,f=25
  word=താളാത്മകമായ,f=25
- word=താള്‍,f=25
+ word=താൾ,f=25
  word=താലൂക്കുകളുടെ,f=25
  word=താലൂക്കിലും,f=25
  word=താലുക്ക്,f=25
@@ -47619,7 +47619,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ചെയ്യുന്നതുവഴി,f=24
  word=ചെയ്യുന്നതാവും,f=24
  word=ചെയ്യാറ്,f=24
- word=ചെയ്യാന്‍,f=24
+ word=ചെയ്യാൻ,f=24
  word=ചെയ്യപ്പെടുമ്പോൾ,f=24
  word=ചെയ്യപ്പെടുകയുണ്ടായി,f=24
  word=ചെയ്യണമെന്നും,f=24
@@ -47996,7 +47996,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=കാലാനുസൃതമായ,f=22
  word=കാലാകാലങ്ങളായി,f=22
  word=കാലയളവിനെ,f=22
- word=കാലം‍,f=22
+ word=കാലം,f=22
  word=കാലഘട്ടവും,f=22
  word=കാര്യങ്ങളെക്കുറിച്ച്,f=22
  word=കാര്യക്ഷമതയും,f=22
@@ -48420,7 +48420,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=ഇം‌ഗ്ലീഷ്,f=20
  word=ഇംഗ്ലീഷുകാരുമായി,f=20
  word=ഇംഗ്ലണ്ടിലേക്കു,f=20
- word=ഇമെയിൽ‍‍,f=20
+ word=ഇമെയിൽ,f=20
  word=ഇൿബാൽ,f=20
  word=ഇപ്പോളും,f=20
  word=ഇപ്പൊഴും,f=20
@@ -48981,7 +48981,7 @@ dictionary=main:ml,locale=ml,description=Malayalam wordlist. Author: Jishnu Moha
  word=സ്കോറിംഗ്,f=18
  word=സ്കോട്ട്ലൻഡിലെ,f=18
  word=സ്കോട്ടിയ,f=18
- word=സ്കൂൾ‍,f=18
+ word=സ്കൂൾ,f=18
  word=സൗരദൂരം,f=18
  word=സൗഗന്ധികം,f=18
  word=സൗകര്യത്തിനു,f=18
