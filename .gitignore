@@ -1,2 +1,4 @@
 dumps/
 *.swp
+*.dict
+*.xml
