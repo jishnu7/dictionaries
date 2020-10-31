@@ -1,0 +1,32 @@
+{
+  "identifier": "ml-basic",
+  "name": "Malayalam Basic",
+  "description": "Collection of Malayalam words sourced from Wikipedia",
+  "lang": "ml",
+  "versions": [
+    {
+      "identifier": "ml-basic-1",
+      "version": 1,
+      "description": "Words with highest confidence",
+      "size": 12481353
+    },
+    {
+      "identifier": "ml-basic-2",
+      "version": 2,
+      "description": "Words with confidence lesser than 95",
+      "size": 11814988
+    },
+    {
+      "identifier": "ml-basic-3",
+      "version": 3,
+      "description": "Words with confidence lesser than 3",
+      "size": 10461558
+    },
+    {
+      "identifier": "ml-basic-4",
+      "version": 4,
+      "description": "Words with confidence 1",
+      "size": 7556327
+    }
+  ]
+}
