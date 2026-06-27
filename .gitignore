@@ -2,3 +2,4 @@ dumps/
 *.swp
 *.dict
 *.xml
+dist/
