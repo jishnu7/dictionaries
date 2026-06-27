@@ -37,6 +37,9 @@ index, and extracts it into filesDir/varnam/<lang>/.
 import argparse
 import hashlib
 import json
+import shutil
+import sqlite3
+import tempfile
 import zipfile
 from pathlib import Path
 
@@ -60,6 +63,24 @@ def sha256_of(path: Path) -> str:
     return digest.hexdigest()
 
 
+def migrate_vst(src: Path, dst: Path) -> None:
+    """Copy a VST to dst, upgrading the old libvarnam schema for govarnam 1.9+.
+
+    The libvarnam-era VSTs predate govarnam's `weight` column on the `symbols` table;
+    without it govarnam errors ("no such column: weight") and returns the input
+    untransliterated. Adding the column (idempotent) restores transliteration.
+    """
+    shutil.copy2(src, dst)
+    conn = sqlite3.connect(dst)
+    try:
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(symbols)")]
+        if "weight" not in cols:
+            conn.execute("ALTER TABLE symbols ADD COLUMN weight INTEGER")
+            conn.commit()
+    finally:
+        conn.close()
+
+
 def collect_files(lang_dir: Path, lang: str):
     """Return (vst_path, [vlf_paths], pack_json_dict) for a language directory."""
     vst = lang_dir / f"{lang}.vst"
@@ -79,10 +100,13 @@ def build_language(lang: str, lang_dir: Path, out_dir: Path, version: int) -> di
     zip_path = out_dir / zip_name
     # Flat archive (arcname = bare filename) so the keyboard extracts straight
     # into filesDir/varnam/<lang>/ without nested directories.
-    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
-        zf.write(vst, arcname=vst.name)
-        for vlf in vlfs:
-            zf.write(vlf, arcname=vlf.name)
+    with tempfile.TemporaryDirectory() as tmp:
+        migrated_vst = Path(tmp) / vst.name
+        migrate_vst(vst, migrated_vst)
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.write(migrated_vst, arcname=vst.name)
+            for vlf in vlfs:
+                zf.write(vlf, arcname=vlf.name)
 
     return {
         "id": lang,
