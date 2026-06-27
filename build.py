@@ -81,6 +81,29 @@ def migrate_vst(src: Path, dst: Path) -> None:
         conn.close()
 
 
+def convert_vlf(src: Path, dst: Path) -> None:
+    """Convert a libvarnam learnings file to govarnam's import JSON.
+
+    Old format is a JSON array: [{"word", "confidence", "patterns":[{"pattern","learned"}]}].
+    govarnam's Import expects {"words":[{"w","c","l"}], "patterns":[{"p","w"}]}. Without this,
+    import is a no-op and no dictionary (word) suggestions appear. Already-converted files
+    (a dict with "words") are copied through unchanged.
+    """
+    with open(src, encoding="utf-8") as f:
+        data = json.load(f)
+    if isinstance(data, dict):  # already govarnam format
+        shutil.copy2(src, dst)
+        return
+    words, patterns = [], []
+    for entry in data:
+        word = entry["word"]
+        words.append({"w": word, "c": entry.get("confidence", 0), "l": 0})
+        for p in entry.get("patterns", []):
+            patterns.append({"p": p["pattern"], "w": word})
+    with open(dst, "w", encoding="utf-8") as f:
+        json.dump({"words": words, "patterns": patterns}, f, ensure_ascii=False)
+
+
 def collect_files(lang_dir: Path, lang: str):
     """Return (vst_path, [vlf_paths], pack_json_dict) for a language directory."""
     vst = lang_dir / f"{lang}.vst"
@@ -106,7 +129,9 @@ def build_language(lang: str, lang_dir: Path, out_dir: Path, version: int) -> di
         with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
             zf.write(migrated_vst, arcname=vst.name)
             for vlf in vlfs:
-                zf.write(vlf, arcname=vlf.name)
+                converted = Path(tmp) / vlf.name
+                convert_vlf(vlf, converted)
+                zf.write(converted, arcname=vlf.name)
 
     return {
         "id": lang,
