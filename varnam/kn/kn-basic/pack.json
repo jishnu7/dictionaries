@@ -1,0 +1,32 @@
+{
+  "identifier": "kn-basic",
+  "name": "Kannada Basic",
+  "description": "Collection of Kannada words sourced from Websites",
+  "lang": "kn",
+  "versions": [
+    {
+      "identifier": "kn-basic-1",
+      "version": 1,
+      "description": "Words with highest confidence",
+      "size": 13610304
+    },
+    {
+      "identifier": "kn-basic-2",
+      "version": 2,
+      "description": "Words with confidence lesser than 362",
+      "size": 12195978
+    },
+    {
+      "identifier": "kn-basic-3",
+      "version": 3,
+      "description": "Words with confidence around 2",
+      "size": 10914166
+    },
+    {
+      "identifier": "kn-basic-4",
+      "version": 4,
+      "description": "Words with confidence around 1",
+      "size": 1211623
+    }
+  ]
+} 

@@ -1,0 +1,26 @@
+{
+  "identifier": "te-basic",
+  "name": "Telugu Basic",
+  "description": "Collection of Telugu words sourced from Websites",
+  "lang": "te",
+  "versions": [
+    {
+      "identifier": "te-basic-1",
+      "version": 1,
+      "description": "Words with highest confidence",
+      "size": 12440051
+    },
+    {
+      "identifier": "te-basic-2",
+      "version": 2,
+      "description": "Words with confidence lesser than 413",
+      "size": 11323828
+    },
+    {
+      "identifier": "te-basic-3",
+      "version": 3,
+      "description": "Words with confidence around 2",
+      "size": 10452811
+    }
+  ]
+} 

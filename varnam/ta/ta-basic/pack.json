@@ -1,0 +1,38 @@
+{
+  "identifier": "ta-basic",
+  "name": "Tamil Basic",
+  "description": "Collection of Tamil words sourced from Websites",
+  "lang": "ta",
+  "versions": [
+    {
+      "identifier": "ta-basic-1",
+      "version": 1,
+      "description": "Words with highest confidence",
+      "size": 30314084
+    },
+    {
+      "identifier": "ta-basic-2",
+      "version": 2,
+      "description": "Words with confidence lesser than 857",
+      "size": 33154247
+    },
+    {
+      "identifier": "ta-basic-3",
+      "version": 3,
+      "description": "Words with confidence lesser than 348",
+      "size": 23155311
+    },
+    {
+      "identifier": "ta-basic-4",
+      "version": 4,
+      "description": "Words with confidence around 2",
+      "size": 20394181
+    },
+    {
+      "identifier": "ta-basic-5",
+      "version": 5,
+      "description": "Words with confidence around 1",
+      "size": 7246120
+    }
+  ]
+} 

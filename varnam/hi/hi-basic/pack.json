@@ -1,0 +1,26 @@
+{
+  "identifier": "hi-basic",
+  "name": "Hindi Basic",
+  "description": "Collection of Hindi words sourced from Websites",
+  "lang": "hi",
+  "versions": [
+    {
+      "identifier": "hi-basic-1",
+      "version": 1,
+      "description": "Words with highest confidence",
+      "size": 14346501
+    },
+    {
+      "identifier": "hi-basic-2",
+      "version": 2,
+      "description": "Words with confidence lesser than 1034",
+      "size": 11768503
+    },
+    {
+      "identifier": "hi-basic-3",
+      "version": 3,
+      "description": "Words with confidence around 1",
+      "size": 5026705
+    }
+  ]
+} 
