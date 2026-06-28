@@ -1,0 +1,13 @@
+{
+  "code": "gom",
+  "name": "Konkani",
+  "wiki": "gom",
+  "version": 1,
+  "has_varnam": false,
+  "script": "Devanagari",
+  "ranges": [
+    "0900-097F"
+  ],
+  "min_freq": 3,
+  "max_words": 50000
+}

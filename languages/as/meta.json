@@ -1,0 +1,17 @@
+{
+  "code": "as",
+  "name": "Assamese",
+  "wiki": "as",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Bengali",
+  "ranges": [
+    "0980-09FF"
+  ],
+  "min_freq": 4,
+  "max_words": 50000,
+  "scheme_id": "as",
+  "packs": [
+    "as-basic"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "code": "gu",
+  "name": "Gujarati",
+  "wiki": "gu",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Gujarati",
+  "ranges": [
+    "0A80-0AFF"
+  ],
+  "min_freq": 4,
+  "max_words": 50000,
+  "scheme_id": "gu",
+  "packs": [
+    "gu-basic"
+  ]
+}

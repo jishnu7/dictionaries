@@ -1,0 +1,17 @@
+{
+  "code": "pa",
+  "name": "Punjabi",
+  "wiki": "pa",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Gurmukhi",
+  "ranges": [
+    "0A00-0A7F"
+  ],
+  "min_freq": 2,
+  "max_words": 20000,
+  "scheme_id": "pa",
+  "packs": [
+    "pa-basic"
+  ]
+}

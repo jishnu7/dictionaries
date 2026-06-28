@@ -1,8 +1,8 @@
 name: Build and publish language packs
 
-# Repackages varnamproject/schemes release zips into per-language <lang>.zip + index.json that
-# Indic Keyboard's VarnamDownloadManager downloads. build.py fetches the upstream zips itself,
-# so no submodule/LFS checkout is needed.
+# Builds every language artifact from the committed per-language sources in languages/ and
+# publishes <lang>.zip + index.json that Indic Keyboard's VarnamDownloadManager downloads.
+# The govarnam CLI is downloaded as a prebuilt binary; the dicttool jar is committed.
 
 on:
   push:
@@ -11,13 +11,13 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Data version stamped on every scheme'
+        description: 'Data version stamped on every pack'
         required: true
         default: '1'
-      schemes_tag:
-        description: 'varnamproject/schemes release tag to source data from'
-        required: true
-        default: 'v1.8.0'
+      langs:
+        description: 'Optional space-separated subset of language codes (default: all)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -34,6 +34,18 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '11'
+
+      - name: Download govarnam CLI
+        run: make varnamcli
+
+      - name: Fetch scheme VSTs from varnamproject/schemes
+        run: make schemes
+
       - name: Resolve version and tag
         id: meta
         run: |
@@ -48,10 +60,10 @@ jobs:
 
       - name: Build packs + index.json
         run: |
-          python3 build.py \
-            --schemes-tag "${{ github.event.inputs.schemes_tag || 'v1.8.0' }}" \
-            --version "${{ steps.meta.outputs.version }}" \
-            --base-url "${{ github.server_url }}/${{ github.repository }}/releases/download/${{ steps.meta.outputs.tag }}"
+          make all \
+            VERSION="${{ steps.meta.outputs.version }}" \
+            BASE_URL="${{ github.server_url }}/${{ github.repository }}/releases/download/${{ steps.meta.outputs.tag }}" \
+            LANGS="${{ github.event.inputs.langs }}"
 
       - name: Publish release assets
         uses: softprops/action-gh-release@v2

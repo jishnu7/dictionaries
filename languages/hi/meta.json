@@ -1,0 +1,17 @@
+{
+  "code": "hi",
+  "name": "Hindi",
+  "wiki": "hi",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Devanagari",
+  "ranges": [
+    "0900-097F"
+  ],
+  "min_freq": 5,
+  "max_words": 50000,
+  "scheme_id": "hi",
+  "packs": [
+    "hi-basic"
+  ]
+}

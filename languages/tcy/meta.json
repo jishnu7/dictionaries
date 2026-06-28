@@ -1,0 +1,13 @@
+{
+  "code": "tcy",
+  "name": "Tulu",
+  "wiki": "tcy",
+  "version": 1,
+  "has_varnam": false,
+  "script": "Kannada",
+  "ranges": [
+    "0C80-0CFF"
+  ],
+  "min_freq": 3,
+  "max_words": 50000
+}

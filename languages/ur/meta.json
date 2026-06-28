@@ -1,0 +1,15 @@
+{
+  "code": "ur",
+  "name": "Urdu",
+  "wiki": "ur",
+  "version": 1,
+  "has_varnam": false,
+  "script": "Arabic",
+  "ranges": [
+    "0600-06FF",
+    "0750-077F",
+    "FB50-FDFF"
+  ],
+  "min_freq": 5,
+  "max_words": 50000
+}

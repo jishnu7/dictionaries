@@ -1,0 +1,17 @@
+{
+  "code": "ta",
+  "name": "Tamil",
+  "wiki": "ta",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Tamil",
+  "ranges": [
+    "0B80-0BFF"
+  ],
+  "min_freq": 5,
+  "max_words": 50000,
+  "scheme_id": "ta",
+  "packs": [
+    "ta-basic"
+  ]
+}

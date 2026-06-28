@@ -1,0 +1,17 @@
+{
+  "code": "ml",
+  "name": "Malayalam",
+  "wiki": "ml",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Malayalam",
+  "ranges": [
+    "0D00-0D7F"
+  ],
+  "min_freq": 5,
+  "max_words": 250000,
+  "scheme_id": "ml",
+  "packs": [
+    "ml-basic"
+  ]
+}

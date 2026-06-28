@@ -1,0 +1,17 @@
+{
+  "code": "sa",
+  "name": "Sanskrit",
+  "wiki": "sa",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Devanagari",
+  "ranges": [
+    "0900-097F"
+  ],
+  "min_freq": 4,
+  "max_words": 50000,
+  "scheme_id": "sa",
+  "packs": [
+    "sa-basic"
+  ]
+}

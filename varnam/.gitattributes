@@ -1,3 +1,0 @@
-*.vst filter=lfs diff=lfs merge=lfs -text
-*.vpf filter=lfs diff=lfs merge=lfs -text
-*.vlf filter=lfs diff=lfs merge=lfs -text

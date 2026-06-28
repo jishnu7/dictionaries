@@ -3,3 +3,7 @@ dumps/
 *.dict
 *.xml
 dist/
+build/
+tools/varnam/
+*.candidate.txt
+languages/*/scheme/

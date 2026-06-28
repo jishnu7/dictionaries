@@ -1,0 +1,15 @@
+{
+  "code": "ks",
+  "name": "Kashmiri",
+  "wiki": "ks",
+  "version": 1,
+  "has_varnam": false,
+  "script": "Arabic",
+  "ranges": [
+    "0600-06FF",
+    "0750-077F",
+    "FB50-FDFF"
+  ],
+  "min_freq": 2,
+  "max_words": 20000
+}

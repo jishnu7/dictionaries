@@ -1,0 +1,13 @@
+{
+  "code": "sat",
+  "name": "Santali",
+  "wiki": "sat",
+  "version": 1,
+  "has_varnam": false,
+  "script": "Ol Chiki",
+  "ranges": [
+    "1C50-1C7F"
+  ],
+  "min_freq": 3,
+  "max_words": 50000
+}

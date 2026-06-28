@@ -1,0 +1,17 @@
+{
+  "code": "or",
+  "name": "Odia",
+  "wiki": "or",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Odia",
+  "ranges": [
+    "0B00-0B7F"
+  ],
+  "min_freq": 4,
+  "max_words": 50000,
+  "scheme_id": "or",
+  "packs": [
+    "or-basic"
+  ]
+}

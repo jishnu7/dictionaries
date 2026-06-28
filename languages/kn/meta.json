@@ -1,0 +1,17 @@
+{
+  "code": "kn",
+  "name": "Kannada",
+  "wiki": "kn",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Kannada",
+  "ranges": [
+    "0C80-0CFF"
+  ],
+  "min_freq": 5,
+  "max_words": 50000,
+  "scheme_id": "kn",
+  "packs": [
+    "kn-basic"
+  ]
+}

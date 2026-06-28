@@ -1,0 +1,17 @@
+{
+  "code": "mr",
+  "name": "Marathi",
+  "wiki": "mr",
+  "version": 1,
+  "has_varnam": true,
+  "script": "Devanagari",
+  "ranges": [
+    "0900-097F"
+  ],
+  "min_freq": 5,
+  "max_words": 50000,
+  "scheme_id": "mr",
+  "packs": [
+    "mr-basic"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "code": "sd",
+  "name": "Sindhi",
+  "wiki": "sd",
+  "version": 1,
+  "has_varnam": false,
+  "script": "Arabic",
+  "ranges": [
+    "0600-06FF",
+    "0750-077F",
+    "FB50-FDFF"
+  ],
+  "min_freq": 3,
+  "max_words": 50000
+}
