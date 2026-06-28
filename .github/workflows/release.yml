@@ -1,7 +1,8 @@
 name: Build and publish language packs
 
-# Runs on GitHub (the repo is mirrored here from GitLab). Packages each language into a
-# <lang>.zip plus index.json that Indic Keyboard's VarnamDownloadManager downloads.
+# Repackages varnamproject/schemes release zips into per-language <lang>.zip + index.json that
+# Indic Keyboard's VarnamDownloadManager downloads. build.py fetches the upstream zips itself,
+# so no submodule/LFS checkout is needed.
 
 on:
   push:
@@ -13,6 +14,10 @@ on:
         description: 'Data version stamped on every scheme'
         required: true
         default: '1'
+      schemes_tag:
+        description: 'varnamproject/schemes release tag to source data from'
+        required: true
+        default: 'v1.8.0'
 
 permissions:
   contents: write
@@ -21,10 +26,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (with LFS)
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          lfs: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -46,6 +49,7 @@ jobs:
       - name: Build packs + index.json
         run: |
           python3 build.py \
+            --schemes-tag "${{ github.event.inputs.schemes_tag || 'v1.8.0' }}" \
             --version "${{ steps.meta.outputs.version }}" \
             --base-url "${{ github.server_url }}/${{ github.repository }}/releases/download/${{ steps.meta.outputs.tag }}"
 

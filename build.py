@@ -14,36 +14,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Package Varnam language data into one tarball per language plus an index.json.
+"""Repackage varnamproject/schemes release zips into per-language packs for Indic Keyboard.
 
-Reads the varnam language data (under varnam/ by default), laid out as:
+Source of truth is the upstream govarnam scheme data published at
+https://github.com/varnamproject/schemes/releases — each <lang>.zip there contains a built,
+govarnam-native VST (real symbol weights) and govarnam-format .vlf learnings packs. We download
+those, flatten them, and emit:
 
-    varnam/<lang>/<lang>.vst
-    varnam/<lang>/<lang>-basic/pack.json
-    varnam/<lang>/<lang>-basic/<lang>-basic-N.vlf
-
-Produces, under the output dir:
-
-    <lang>.zip      - flat archive of <lang>.vst + every <lang>-basic-N.vlf
+    <lang>.zip      - flat archive of <lang>.vst + every .vlf (bare filenames at root)
     index.json      - manifest the keyboard's VarnamDownloadManager fetches
 
-Zip (not tar.gz) because Android's SDK extracts zip natively via
-java.util.zip.ZipInputStream — no third-party archive dependency in the keyboard.
-
-The keyboard downloads one zip per language, verifies its sha256 against the
-index, and extracts it into filesDir/varnam/<lang>/.
+The keyboard downloads one zip per language, verifies sha256 against the index, and extracts it
+(flattening) into filesDir/varnam/<lang>/.
 """
 
 import argparse
 import hashlib
 import json
-import shutil
-import sqlite3
 import tempfile
+import urllib.request
 import zipfile
 from pathlib import Path
 
-# Display names keyed by ISO code; pack.json only carries "<Name> Basic".
+SCHEMES_RELEASE_BASE = "https://github.com/varnamproject/schemes/releases/download"
+
+# Display names keyed by ISO code (the languages we ship).
 LANG_NAMES = {
     "ml": "Malayalam",
     "hi": "Hindi",
@@ -63,132 +58,97 @@ def sha256_of(path: Path) -> str:
     return digest.hexdigest()
 
 
-def migrate_vst(src: Path, dst: Path) -> None:
-    """Copy a VST to dst, upgrading the old libvarnam schema for govarnam 1.9+.
-
-    The libvarnam-era VSTs predate govarnam's `weight` column on the `symbols` table;
-    without it govarnam errors ("no such column: weight") and returns the input
-    untransliterated. Adding the column (idempotent) restores transliteration.
-    """
-    shutil.copy2(src, dst)
-    conn = sqlite3.connect(dst)
-    try:
-        cols = [r[1] for r in conn.execute("PRAGMA table_info(symbols)")]
-        if "weight" not in cols:
-            conn.execute("ALTER TABLE symbols ADD COLUMN weight INTEGER")
-            conn.commit()
-    finally:
-        conn.close()
+def download_scheme_zip(lang: str, tag: str, dst: Path) -> None:
+    url = f"{SCHEMES_RELEASE_BASE}/{tag}/{lang}.zip"
+    print(f"  fetching {url}")
+    with urllib.request.urlopen(url) as resp, open(dst, "wb") as out:
+        out.write(resp.read())
 
 
-def convert_vlf(src: Path, dst: Path) -> None:
-    """Convert a libvarnam learnings file to govarnam's import JSON.
-
-    Old format is a JSON array: [{"word", "confidence", "patterns":[{"pattern","learned"}]}].
-    govarnam's Import expects {"words":[{"w","c","l"}], "patterns":[{"p","w"}]}. Without this,
-    import is a no-op and no dictionary (word) suggestions appear. Already-converted files
-    (a dict with "words") are copied through unchanged.
-    """
-    with open(src, encoding="utf-8") as f:
-        data = json.load(f)
-    if isinstance(data, dict):  # already govarnam format
-        shutil.copy2(src, dst)
-        return
-    words, patterns = [], []
-    for entry in data:
-        word = entry["word"]
-        words.append({"w": word, "c": entry.get("confidence", 0), "l": 0})
-        for p in entry.get("patterns", []):
-            patterns.append({"p": p["pattern"], "w": word})
-    with open(dst, "w", encoding="utf-8") as f:
-        json.dump({"words": words, "patterns": patterns}, f, ensure_ascii=False)
+def description_of(extracted: Path, lang: str) -> str:
+    """Best-effort description from the upstream <lang>-basic/pack.json."""
+    pack = next(extracted.rglob(f"{lang}-basic/pack.json"), None)
+    if pack:
+        try:
+            return json.load(open(pack, encoding="utf-8")).get("description", "")
+        except Exception:
+            pass
+    return ""
 
 
-def collect_files(lang_dir: Path, lang: str):
-    """Return (vst_path, [vlf_paths], pack_json_dict) for a language directory."""
-    vst = lang_dir / f"{lang}.vst"
-    if not vst.exists():
-        raise FileNotFoundError(f"missing scheme table: {vst}")
-
-    pack_dir = lang_dir / f"{lang}-basic"
-    pack_json = json.load(open(pack_dir / "pack.json"))
-    vlfs = sorted(pack_dir.glob(f"{lang}-basic-*.vlf"))
-    return vst, vlfs, pack_json
-
-
-def build_language(lang: str, lang_dir: Path, out_dir: Path, version: int) -> dict:
-    vst, vlfs, pack_json = collect_files(lang_dir, lang)
-
+def build_language(lang: str, tag: str, out_dir: Path, version: int) -> dict:
     zip_name = f"{lang}.zip"
     zip_path = out_dir / zip_name
-    # Flat archive (arcname = bare filename) so the keyboard extracts straight
-    # into filesDir/varnam/<lang>/ without nested directories.
     with tempfile.TemporaryDirectory() as tmp:
-        migrated_vst = Path(tmp) / vst.name
-        migrate_vst(vst, migrated_vst)
-        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
-            zf.write(migrated_vst, arcname=vst.name)
-            for vlf in vlfs:
-                converted = Path(tmp) / vlf.name
-                convert_vlf(vlf, converted)
-                zf.write(converted, arcname=vlf.name)
+        tmp = Path(tmp)
+        upstream = tmp / "upstream.zip"
+        download_scheme_zip(lang, tag, upstream)
+        extracted = tmp / "extracted"
+        with zipfile.ZipFile(upstream) as zf:
+            zf.extractall(extracted)
 
-    return {
-        "id": lang,
-        "lang": lang,
-        "name": LANG_NAMES.get(lang, lang),
-        "description": pack_json.get("description", ""),
-        "file": zip_name,
-        "size": zip_path.stat().st_size,
-        "sha256": sha256_of(zip_path),
-        "version": version,
-        "contents": {
-            "vst": vst.name,
-            "vlf": [v.name for v in vlfs],
-        },
-    }
+        vst = next(extracted.rglob(f"{lang}.vst"), None)
+        if vst is None:
+            raise FileNotFoundError(f"{lang}.vst not found in upstream {lang}.zip")
+        vlfs = sorted(extracted.rglob("*.vlf"))
+        if not vlfs:
+            raise FileNotFoundError(f"no .vlf packs in upstream {lang}.zip")
+
+        # Flat archive (arcname = bare filename) so the keyboard extracts straight into
+        # filesDir/varnam/<lang>/ without nested directories.
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+            zf.write(vst, arcname=vst.name)
+            for vlf in vlfs:
+                zf.write(vlf, arcname=vlf.name)
+
+        return {
+            "id": lang,
+            "lang": lang,
+            "name": LANG_NAMES.get(lang, lang),
+            "description": description_of(extracted, lang),
+            "file": zip_name,
+            "size": zip_path.stat().st_size,
+            "sha256": sha256_of(zip_path),
+            "version": version,
+            "contents": {"vst": vst.name, "vlf": [v.name for v in vlfs]},
+        }
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--languages-dir", default="varnam",
-        help="path to the languages submodule (default: languages)")
+        "--schemes-tag", default="v1.8.0",
+        help="varnamproject/schemes release tag to source data from (default: v1.8.0)")
     parser.add_argument(
         "--out", default="dist",
-        help="output directory for tarballs + index.json (default: dist)")
+        help="output directory for zips + index.json (default: dist)")
     parser.add_argument(
         "--base-url", default="",
-        help="base URL prepended to each tarball's `url` field "
+        help="base URL prepended to each zip's `url` field "
              "(e.g. https://github.com/<org>/<repo>/releases/download/<tag>)")
     parser.add_argument(
         "--version", type=int, default=1,
         help="data version stamped on every scheme (drives update detection)")
     parser.add_argument(
-        "--langs", nargs="*",
-        help="subset of language codes to build (default: all found)")
+        "--langs", nargs="*", default=sorted(LANG_NAMES),
+        help="language codes to build (default: all shipped languages)")
     args = parser.parse_args()
 
-    languages_dir = Path(args.languages_dir)
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    langs = args.langs or sorted(
-        p.name for p in languages_dir.iterdir()
-        if p.is_dir() and (p / f"{p.name}.vst").exists())
-
     schemes = []
-    for lang in langs:
-        scheme = build_language(lang, languages_dir / lang, out_dir, args.version)
+    for lang in args.langs:
+        scheme = build_language(lang, args.schemes_tag, out_dir, args.version)
         if args.base_url:
             scheme["url"] = f"{args.base_url.rstrip('/')}/{scheme['file']}"
         schemes.append(scheme)
         print(f"packaged {lang}: {scheme['size']:,} bytes  sha256={scheme['sha256'][:12]}…")
 
-    index = {"version": args.version, "schemes": schemes}
+    index = {"version": args.version, "schemes_tag": args.schemes_tag, "schemes": schemes}
     with open(out_dir / "index.json", "w") as f:
         json.dump(index, f, indent=2, ensure_ascii=False)
-    print(f"wrote {out_dir / 'index.json'} ({len(schemes)} schemes)")
+    print(f"wrote {out_dir / 'index.json'} ({len(schemes)} schemes from schemes {args.schemes_tag})")
 
 
 if __name__ == "__main__":
