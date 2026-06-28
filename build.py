@@ -90,9 +90,9 @@ def build_language(lang: str, tag: str, out_dir: Path, version: int) -> dict:
         vst = next(extracted.rglob(f"{lang}.vst"), None)
         if vst is None:
             raise FileNotFoundError(f"{lang}.vst not found in upstream {lang}.zip")
+        # Only some schemes ship trained .vlf dictionary packs (e.g. ml). VST-only languages
+        # still transliterate; they just have no dictionary word suggestions until learned.
         vlfs = sorted(extracted.rglob("*.vlf"))
-        if not vlfs:
-            raise FileNotFoundError(f"no .vlf packs in upstream {lang}.zip")
 
         # Flat archive (arcname = bare filename) so the keyboard extracts straight into
         # filesDir/varnam/<lang>/ without nested directories.
@@ -143,7 +143,8 @@ def main():
         if args.base_url:
             scheme["url"] = f"{args.base_url.rstrip('/')}/{scheme['file']}"
         schemes.append(scheme)
-        print(f"packaged {lang}: {scheme['size']:,} bytes  sha256={scheme['sha256'][:12]}…")
+        print(f"packaged {lang}: {scheme['size']:,} bytes, "
+              f"{len(scheme['contents']['vlf'])} vlf pack(s)  sha256={scheme['sha256'][:12]}…")
 
     index = {"version": args.version, "schemes_tag": args.schemes_tag, "schemes": schemes}
     with open(out_dir / "index.json", "w") as f:
