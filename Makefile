@@ -7,7 +7,7 @@
 #
 #   make varnamcli                 # download the govarnam CLI (once)
 #   make download LANG=ml          # fetch the Wikipedia dump
-#   make extract  LANG=ml          # dump -> languages/ml/wordfreq.candidate.txt (review, then commit)
+#   make extract  LANG=ml          # dump -> languages/ml/{wordfreq,bigramfreq}.candidate.txt (review, then commit)
 #   make lang     LANG=ml          # wordfreq.txt -> combined -> dict -> varnam -> dist/ml.zip
 #   make all                       # build every language + dist/index.json
 #
@@ -27,7 +27,7 @@ PY  := python3
 LANG ?=
 wiki = $(shell $(PY) -c "import json;print(json.load(open('languages/$(LANG)/meta.json'))['wiki'])")
 
-.PHONY: help varnamcli dicttool scheme schemes download extract combined dict varnam pack lang index all check-lang prep-varnam
+.PHONY: help varnamcli dicttool scheme schemes download extract combined dict varnam pack lang index all check-lang prep-varnam prep-all
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?#' $(MAKEFILE_LIST) | sed 's/:.*#/\t/'
@@ -84,7 +84,7 @@ prep-varnam: check-lang  # for a varnam LANG: ensure varnamcli is built and the 
 download: check-lang ## fetch the Wikipedia dump for LANG
 	tools/dwn.sh $(wiki)
 
-extract: check-lang ## dump -> languages/$(LANG)/wordfreq.candidate.txt
+extract: check-lang ## dump -> languages/$(LANG)/{wordfreq,bigramfreq}.candidate.txt
 	$(PY) tools/extract.py $(LANG)
 
 combined: prep-varnam ## build/$(LANG)/$(LANG).combined (varnam langs: from the sanitized .vlf)
@@ -105,5 +105,12 @@ lang: prep-varnam ## full chain for one LANG
 index: ## aggregate dist/index.json from the per-language sidecars
 	$(PY) build.py --version $(VERSION) index
 
-all: ## build every language + index.json (LANGS="ml hi" for a subset; run `make varnamcli schemes` first)
+prep-all:  # ensure varnamcli exists and every varnam language's .vst is fetched (missing ones only)
+	@test -x "$(VARNAM_DIR)/varnamcli" || $(MAKE) --no-print-directory varnamcli
+	@for l in $$($(PY) build.py langs --varnam); do \
+	  sid=$$($(PY) -c "import json;print(json.load(open('languages/$$l/meta.json')).get('scheme_id','$$l'))"); \
+	  [ -f "languages/$$l/scheme/$$sid.vst" ] || $(MAKE) --no-print-directory scheme LANG=$$l; \
+	done
+
+all: prep-all ## build every language + index.json (LANGS="ml hi" for a subset)
 	$(VARNAM_ENV) $(PY) build.py --version $(VERSION) --base-url "$(BASE_URL)" all $(if $(LANGS),--langs $(LANGS))

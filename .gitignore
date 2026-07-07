@@ -7,3 +7,4 @@ build/
 tools/varnam/
 *.candidate.txt
 languages/*/scheme/
+tools/__pycache_/

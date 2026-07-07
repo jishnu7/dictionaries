@@ -116,6 +116,47 @@ def _clean_words(code, words):
             if base_count(w) >= MIN_BASES and (pat is None or pat.match(w))]
 
 
+def _bigrams_for(code, words, weights):
+    """Per-head next-word entries from languages/<code>/bigramfreq.txt, or {} if absent.
+
+    Selection guards against the v2 binary format's floor: a bigram's stored probability is
+    reconstructed relative to the TARGET word's unigram weight, so a very frequent successor
+    listed anywhere in the list would always outrank content successors. Such a successor is
+    kept only when it genuinely is the head's top next word.
+    """
+    src = LANGUAGES / code / "bigramfreq.txt"
+    if not src.exists():
+        return {}
+    meta = meta_of(code)
+    per_word = meta.get("bigrams_per_word", 5)
+    cutoff = meta.get("bigram_unigram_cutoff", 240)
+
+    kept = set(words)
+    successors = {}
+    for line in src.read_text(encoding="utf-8").splitlines():
+        parts = line.split()
+        if len(parts) != 3:
+            continue
+        w1, w2, count = parts
+        if w1 not in kept or w2 not in kept or w1 == w2:
+            continue
+        successors.setdefault(w1, []).append((int(count), w2))
+
+    result = {}
+    for head, cands in successors.items():
+        cands.sort(key=lambda t: -t[0])
+        chosen = []
+        for i, (_, target) in enumerate(cands):
+            if len(chosen) >= per_word:
+                break
+            if i > 0 and weights[target] >= cutoff:
+                continue
+            chosen.append(target)
+        if chosen:
+            result[head] = chosen
+    return result
+
+
 def build_combined(code, version):
     """Build build/<code>/<code>.combined (rank-based reweight to 15..254).
 
@@ -123,6 +164,10 @@ def build_combined(code, version):
     conjunct-validated set — so the LatinIME dictionary gets the same cleaning as the transliteration
     packs. Other languages use wordfreq.txt directly. Either way the words are then script-filtered
     to the language's Unicode ranges, so no out-of-script tokens reach the dictionary.
+
+    If languages/<code>/bigramfreq.txt exists (seeded by tools/extract.py from the same dump),
+    each word also gets next-word `bigram=` entries, which is what the suggestion strip's
+    next-word prediction runs on.
     """
     meta = meta_of(code)
     words = _words_from_vlf(code) if meta.get("has_varnam") else _words_from_wordfreq(code)
@@ -137,15 +182,20 @@ def build_combined(code, version):
 
     n = len(words)
     divider = n // 240 + 1
+    weights = {w: min(254, (n - rank) // divider + 15) for rank, w in enumerate(words)}
+    bigrams = _bigrams_for(code, words, weights)
     header = (f"dictionary=main:{code},locale={code},"
               f"description={meta['name']} wordlist. Author: Jishnu Mohan <jishnu7@gmail.com>,"
               f"date={int(time.time())},version={version}")
+    ngram_count = 0
     with open(out, "w", encoding="utf-8") as f:
         f.write(header + "\n")
-        for rank, word in enumerate(words):
-            weight = min(254, (n - rank) // divider + 15)
-            f.write(f" word={word},f={weight}\n")
-    print(f"{code}: {n:,} words -> {out}")
+        for word in words:
+            f.write(f" word={word},f={weights[word]}\n")
+            for i, target in enumerate(bigrams.get(word, ())):
+                f.write(f"  bigram={target},f={max(1, 200 - 8 * i)}\n")
+                ngram_count += 1
+    print(f"{code}: {n:,} words, {ngram_count:,} bigrams -> {out}")
     return out
 
 
