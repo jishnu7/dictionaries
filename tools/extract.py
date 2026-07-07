@@ -68,13 +68,48 @@ def base_count(word):
                if unicodedata.category(c) not in ("Mn", "Mc", "Me") and c not in (ZWNJ + ZWJ))
 
 
+def article_text_lines(f):
+    """Yield only body-text lines of real articles: namespace 0, not a redirect, inside
+    <text>…</text>. Redirect stubs and meta namespaces (talk/template/user…) otherwise
+    dominate the counts with MediaWiki boilerplate ("redirects to page X", "user talk")."""
+    ns_ok = False
+    is_redirect = False
+    in_text = False
+    for line in f:
+        if in_text:
+            if "</text>" in line:
+                in_text = False
+                yield line.split("</text>", 1)[0]
+            else:
+                yield line
+            continue
+        s = line.lstrip()
+        if s.startswith("<page>"):
+            ns_ok = False
+            is_redirect = False
+        elif s.startswith("<ns>"):
+            ns_ok = s.startswith("<ns>0<")
+        elif s.startswith("<redirect"):
+            is_redirect = True
+        elif "<text" in s and ns_ok and not is_redirect:
+            tag_rest = s.split("<text", 1)[1]
+            if "/>" in tag_rest.split(">", 1)[0] + ">":
+                continue
+            body = tag_rest.split(">", 1)[1] if ">" in tag_rest else ""
+            if "</text>" in body:
+                yield body.split("</text>", 1)[0]
+            else:
+                in_text = True
+                yield body
+
+
 def extract(meta, dump, out, min_freq, max_words, bigram_out=None,
             bigram_min_freq=None, max_bigrams=None):
     token = re.compile(char_class(meta["ranges"]) + "{2,}")
     counts = Counter()
     pair_counts = Counter()
     with bz2.open(dump, "rt", encoding="utf-8", errors="ignore") as f:
-        for line in f:
+        for line in article_text_lines(f):
             prev_tok = None
             prev_end = -1
             for m in token.finditer(line):
