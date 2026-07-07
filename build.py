@@ -212,6 +212,71 @@ def build_dict(code, version):
     return out
 
 
+def build_xlit(code, version):
+    """Romanized gesture dictionary: build/<code>/xlit_<code>.dict.
+
+    Reverse-transliterates the curated word list (via tools/reverse-translit + the varnam
+    scheme) into Latin-script words the gesture decoder can match when a transliteration
+    layout is active; the keyboard then live-transliterates the decoded word back. Case is
+    kept: varnam patterns are case-significant (veeT -> വീട്) and the decoder matches keys
+    case-insensitively while outputting the stored form.
+    """
+    meta = meta_of(code)
+    if not meta.get("has_varnam"):
+        return None
+    driver = REPO / "tools" / "reverse-translit" / "reverse-translit"
+    if not driver.exists():
+        raise FileNotFoundError(f"{driver} missing — run 'make reverse-translit' first")
+    combined = BUILD / code / f"{code}.combined"
+    if not combined.exists():
+        build_combined(code, version)
+
+    words = []
+    weights = {}
+    for line in combined.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^ word=([^,]+),f=(\d+)", line)
+        if m:
+            words.append(m.group(1))
+            weights[m.group(1)] = int(m.group(2))
+
+    env = dict(os.environ)
+    env["VARNAM_VST_DIR"] = str((LANGUAGES / code / "scheme").resolve())
+    env.setdefault("VARNAM_LEARNINGS_DIR", str((BUILD / code).resolve()))
+    proc = subprocess.run([str(driver), meta.get("scheme_id", code)],
+                          input="\n".join(words), capture_output=True, text=True,
+                          check=True, env=env)
+
+    roman = {}
+    for line in proc.stdout.splitlines():
+        try:
+            word, pattern = line.split("\t")
+        except ValueError:
+            continue
+        if not pattern.isascii() or not pattern.replace("'", "").isalpha():
+            continue
+        weight = weights.get(word, 15)
+        if weight > roman.get(pattern, 0):
+            roman[pattern] = weight
+
+    out = BUILD / code / f"xlit_{code}.combined"
+    header = (f"dictionary=xlit:{code},locale={code},"
+              f"description={meta['name']} romanized gesture wordlist,"
+              f"date={int(time.time())},version={version}")
+    with open(out, "w", encoding="utf-8") as f:
+        f.write(header + "\n")
+        for pattern, weight in sorted(roman.items(), key=lambda kv: (-kv[1], kv[0])):
+            f.write(f" word={pattern},f={weight}\n")
+
+    dict_out = BUILD / code / f"xlit_{code}.dict"
+    subprocess.run(
+        [java_bin(), "-jar", str(DICTTOOL_JAR), "makedict", "-s", str(out), "-d", str(dict_out)],
+        check=True)
+    print(f"{code}: {len(roman):,} romanized words -> {dict_out}")
+    for junk in (BUILD / code).glob("*.learnings*"):
+        junk.unlink()
+    return dict_out
+
+
 def build_varnam(code):
     """Learn wordfreq.txt into govarnam packs (<packid>-N.vlf + pack.json); copy the vst."""
     meta = meta_of(code)
@@ -287,6 +352,10 @@ def build_pack(code, version, base_url):
     if dict_file.exists():
         members.append(dict_file)
         contents["dict"] = dict_file.name
+    xlit_file = src / f"xlit_{code}.dict"
+    if xlit_file.exists():
+        members.append(xlit_file)
+        contents["xlit"] = xlit_file.name
     if meta.get("has_varnam"):
         vst = src / f"{code}.vst"
         if vst.exists():
@@ -331,6 +400,7 @@ def build_lang(code, version, base_url):
     build_varnam(code)  # varnam langs: produces the .vlf that build_combined sanitizes from
     build_combined(code, version)
     build_dict(code, version)
+    build_xlit(code, version)
     return build_pack(code, version, base_url)
 
 
@@ -344,7 +414,7 @@ def main():
     ap.add_argument("--base-url", default="",
                     help="base URL prepended to each zip's url field in index.json")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("combined", "dict", "varnam", "pack", "lang"):
+    for name in ("combined", "dict", "xlit", "varnam", "pack", "lang"):
         sub.add_parser(name).add_argument("code")
     sub.add_parser("index")
     p_all = sub.add_parser("all")
@@ -364,6 +434,8 @@ def main():
         build_combined(args.code, args.version)
     elif args.cmd == "dict":
         build_dict(args.code, args.version)
+    elif args.cmd == "xlit":
+        build_xlit(args.code, args.version)
     elif args.cmd == "varnam":
         build_varnam(args.code)
     elif args.cmd == "pack":

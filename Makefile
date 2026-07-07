@@ -27,7 +27,7 @@ PY  := python3
 LANG ?=
 wiki = $(shell $(PY) -c "import json;print(json.load(open('languages/$(LANG)/meta.json'))['wiki'])")
 
-.PHONY: help varnamcli dicttool scheme schemes download extract combined dict varnam pack lang index all check-lang prep-varnam prep-all
+.PHONY: help varnamcli dicttool reverse-translit scheme schemes download extract combined dict xlit varnam pack lang index all check-lang prep-varnam prep-all
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?#' $(MAKEFILE_LIST) | sed 's/:.*#/\t/'
@@ -76,6 +76,7 @@ prep-varnam: check-lang  # for a varnam LANG: ensure varnamcli is built and the 
 	@sid=$$($(PY) -c "import json;m=json.load(open('languages/$(LANG)/meta.json'));print(m.get('scheme_id','') if m.get('has_varnam') else '')"); \
 	if [ -n "$$sid" ]; then \
 	  test -x "$(VARNAM_DIR)/varnamcli" || { echo "varnamcli missing — run 'make varnamcli' first"; exit 1; }; \
+	  test -x "tools/reverse-translit/reverse-translit" || $(MAKE) --no-print-directory reverse-translit; \
 	  [ -f "languages/$(LANG)/scheme/$$sid.vst" ] || $(MAKE) --no-print-directory scheme LANG=$(LANG); \
 	fi
 
@@ -105,8 +106,15 @@ lang: prep-varnam ## full chain for one LANG
 index: ## aggregate dist/index.json from the per-language sidecars
 	$(PY) build.py --version $(VERSION) index
 
+reverse-translit: ## build tools/reverse-translit (romanizer for the xlit gesture dictionaries)
+	@command -v go >/dev/null || { echo "the go toolchain is required to build reverse-translit"; exit 1; }
+	@test -d "$(GOVARNAM_SRC)" || { echo "no govarnam source at $(GOVARNAM_SRC) (set INDIC_KEYBOARD_DIR)"; exit 1; }
+	cd tools/reverse-translit && CGO_ENABLED=1 go build -tags "fts5" -o reverse-translit .
+	@echo "reverse-translit ready"
+
 prep-all:  # ensure varnamcli exists and every varnam language's .vst is fetched (missing ones only)
 	@test -x "$(VARNAM_DIR)/varnamcli" || $(MAKE) --no-print-directory varnamcli
+	@test -x "tools/reverse-translit/reverse-translit" || $(MAKE) --no-print-directory reverse-translit
 	@for l in $$($(PY) build.py langs --varnam); do \
 	  sid=$$($(PY) -c "import json;print(json.load(open('languages/$$l/meta.json')).get('scheme_id','$$l'))"); \
 	  [ -f "languages/$$l/scheme/$$sid.vst" ] || $(MAKE) --no-print-directory scheme LANG=$$l; \
