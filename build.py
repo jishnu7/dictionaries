@@ -38,6 +38,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 import zipfile
 from pathlib import Path
@@ -404,6 +405,64 @@ def build_lang(code, version, base_url):
     return build_pack(code, version, base_url)
 
 
+def _dict_info(path):
+    """(words, bigrams) as reported by `dicttool info` for a .dict file."""
+    out = subprocess.run([java_bin(), "-jar", str(DICTTOOL_JAR), "info", str(path)],
+                         check=True, capture_output=True, text=True).stdout
+    words = bigrams = 0
+    for line in out.splitlines():
+        if line.startswith("Words in the dictionary"):
+            words = int(line.rsplit(":", 1)[1])
+        elif line.startswith("Bigram count"):
+            bigrams = int(line.rsplit(":", 1)[1])
+    return words, bigrams
+
+
+def _human(n):
+    if n >= 1024 ** 2:
+        return f"{n / 1024 ** 2:.1f}M"
+    if n >= 1024:
+        return f"{n / 1024:.0f}K"
+    return f"{n}B"
+
+
+def print_stats():
+    """Per-language stats of the shipped packs, read from dist/<code>.zip only."""
+    header = (f"{'lang':5} {'zip':>8} {'dict':>8} {'words':>8} {'bigrams':>8} "
+              f"{'xlit':>8} {'xlit wds':>8} {'vlf':>9}")
+    print(header)
+    print("-" * len(header))
+    totals = [0, 0, 0, 0, 0, 0]
+    with tempfile.TemporaryDirectory() as tmp:
+        for code in all_codes():
+            zip_path = DIST / f"{code}.zip"
+            if not zip_path.exists():
+                print(f"{code:5} not built")
+                continue
+            with zipfile.ZipFile(zip_path) as zf:
+                names = zf.namelist()
+                dict_name = next((n for n in names if n == f"main_{code}.dict"), None)
+                xlit_name = next((n for n in names if n == f"xlit_{code}.dict"), None)
+                vlf_size = sum(i.file_size for i in zf.infolist() if i.filename.endswith(".vlf"))
+                words = bigrams = xlit_words = dict_size = xlit_size = 0
+                for name, is_xlit in ((dict_name, False), (xlit_name, True)):
+                    if name is None:
+                        continue
+                    w, b = _dict_info(zf.extract(name, Path(tmp) / code))
+                    if is_xlit:
+                        xlit_words, xlit_size = w, zf.getinfo(name).file_size
+                    else:
+                        words, bigrams, dict_size = w, b, zf.getinfo(name).file_size
+            zip_size = zip_path.stat().st_size
+            print(f"{code:5} {_human(zip_size):>8} {_human(dict_size):>8} {words:>8,} "
+                  f"{bigrams:>8,} {_human(xlit_size):>8} {xlit_words:>8,} {_human(vlf_size):>9}")
+            for i, v in enumerate((zip_size, dict_size, words, bigrams, xlit_size, xlit_words)):
+                totals[i] += v
+    print("-" * len(header))
+    print(f"{'total':5} {_human(totals[0]):>8} {_human(totals[1]):>8} {totals[2]:>8,} "
+          f"{totals[3]:>8,} {_human(totals[4]):>8} {totals[5]:>8,}")
+
+
 # ---- cli ----
 
 def main():
@@ -417,6 +476,7 @@ def main():
     for name in ("combined", "dict", "xlit", "varnam", "pack", "lang"):
         sub.add_parser(name).add_argument("code")
     sub.add_parser("index")
+    sub.add_parser("stats")
     p_all = sub.add_parser("all")
     p_all.add_argument("--langs", nargs="*", help="subset of language codes (default: all)")
     p_langs = sub.add_parser("langs")
@@ -444,6 +504,8 @@ def main():
         build_lang(args.code, args.version, args.base_url)
     elif args.cmd == "index":
         build_index(args.version)
+    elif args.cmd == "stats":
+        print_stats()
     elif args.cmd == "all":
         for code in (args.langs or all_codes()):
             if not (LANGUAGES / code / "wordfreq.txt").exists():

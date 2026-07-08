@@ -27,7 +27,7 @@ PY  := python3
 LANG ?=
 wiki = $(shell $(PY) -c "import json;print(json.load(open('languages/$(LANG)/meta.json'))['wiki'])")
 
-.PHONY: help varnamcli dicttool reverse-translit scheme schemes download extract combined dict xlit varnam pack lang index all check-lang prep-varnam prep-all
+.PHONY: help varnamcli dicttool reverse-translit scheme schemes download extract combined dict xlit varnam pack lang index stats all check-lang prep-varnam prep-all
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?#' $(MAKEFILE_LIST) | sed 's/:.*#/\t/'
@@ -105,6 +105,9 @@ lang: prep-varnam ## full chain for one LANG
 
 index: ## aggregate dist/index.json from the per-language sidecars
 	$(PY) build.py --version $(VERSION) index
+
+stats: ## per-language word/bigram/xlit counts and sizes of the built packs (from dist/)
+	$(PY) build.py stats
 
 reverse-translit: ## build tools/reverse-translit (romanizer for the xlit gesture dictionaries)
 	@command -v go >/dev/null || { echo "the go toolchain is required to build reverse-translit"; exit 1; }
