@@ -5,6 +5,7 @@ dumps/
 dist/
 build/
 tools/varnam/
+tools/reverse-translit/reverse-translit
 *.candidate.txt
 languages/*/scheme/
 tools/__pycache_/

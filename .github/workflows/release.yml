@@ -2,7 +2,8 @@ name: Build and publish language packs
 
 # Builds every language artifact from the committed per-language sources in languages/ and
 # publishes <lang>.zip + index.json that Indic Keyboard's VarnamDownloadManager downloads.
-# The govarnam CLI is downloaded as a prebuilt binary; the dicttool jar is committed.
+# The govarnam CLI is downloaded as a prebuilt binary; the dicttool jar is committed;
+# the reverse-translit tool is built from source.
 
 on:
   push:
@@ -40,8 +41,22 @@ jobs:
           distribution: temurin
           java-version: '11'
 
-      - name: Download govarnam CLI
-        run: make varnamcli
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache-dependency-path: tools/reverse-translit/go.sum
+
+      - name: Cache varnam tools
+        uses: actions/cache@v4
+        with:
+          path: |
+            tools/varnam
+            tools/reverse-translit/reverse-translit
+          key: varnam-tools-${{ runner.os }}-${{ hashFiles('Makefile', 'tools/reverse-translit/*.go', 'tools/reverse-translit/go.*') }}
+
+      - name: Build govarnam CLI + reverse-translit
+        run: make varnamcli reverse-translit
 
       - name: Fetch scheme VSTs from varnamproject/schemes
         run: make schemes

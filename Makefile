@@ -5,7 +5,7 @@
 #
 # Per-language data pipeline. Most targets take LANG=<code>:
 #
-#   make varnamcli                 # download the govarnam CLI (once)
+#   make varnamcli                 # build the govarnam CLI from source
 #   make download LANG=ml          # fetch the Wikipedia dump
 #   make extract  LANG=ml          # dump -> languages/ml/{wordfreq,bigramfreq}.candidate.txt (review, then commit)
 #   make lang     LANG=ml          # wordfreq.txt -> combined -> dict -> varnam -> dist/ml.zip
@@ -26,7 +26,7 @@ PY  := python3
 LANG ?=
 wiki = $(shell $(PY) -c "import json;print(json.load(open('languages/$(LANG)/meta.json'))['wiki'])")
 
-.PHONY: help varnamcli dicttool reverse-translit scheme schemes download extract combined dict xlit varnam pack lang index stats all check-lang prep-varnam prep-all
+.PHONY: help govarnam-src varnamcli dicttool reverse-translit scheme schemes download extract combined dict xlit varnam pack lang index stats all check-lang prep-varnam prep-all
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?#' $(MAKEFILE_LIST) | sed 's/:.*#/\t/'
@@ -36,22 +36,22 @@ check-lang:
 
 # ---- toolchain ----
 
-varnamcli: ## get the govarnam CLI into tools/varnam/ (download on Linux x86_64; else build from the keyboard's govarnam submodule)
+govarnam-src:  # ensure govarnam source exists (keyboard checkout, or clone at GOVARNAM_VER)
+	@test -d "$(GOVARNAM_SRC)" || { \
+	  echo "no keyboard checkout at $(GOVARNAM_SRC); cloning govarnam $(GOVARNAM_VER)"; \
+	  git clone --depth 1 --branch $(GOVARNAM_VER) https://github.com/varnamproject/govarnam "$(GOVARNAM_SRC)"; \
+	}
+
+$(VARNAM_DIR)/varnamcli: | govarnam-src
+	@command -v go >/dev/null || { echo "the go toolchain is required to build varnamcli"; exit 1; }
 	@mkdir -p $(VARNAM_DIR)
-	@if [ "$$(uname -s)" = "Linux" ] && [ "$$(uname -m)" = "x86_64" ]; then \
-	  echo "Downloading govarnam $(GOVARNAM_VER) (linux x86_64)"; \
-	  curl -L --fail -o /tmp/govarnam.zip https://github.com/varnamproject/govarnam/releases/download/$(GOVARNAM_VER)/govarnam-$(patsubst v%,%,$(GOVARNAM_VER))-x86_64.zip; \
-	  cd $(VARNAM_DIR) && unzip -joq /tmp/govarnam.zip '*/varnamcli' '*/libgovarnam.so*' && rm -f /tmp/govarnam.zip; \
-	else \
-	  test -d "$(GOVARNAM_SRC)" || { echo "no govarnam source at $(GOVARNAM_SRC) (set INDIC_KEYBOARD_DIR)"; exit 1; }; \
-	  command -v go >/dev/null || { echo "the go toolchain is required to build varnamcli on $$(uname -s)"; exit 1; }; \
-	  echo "Building varnamcli from $(GOVARNAM_SRC) (no prebuilt binary for this platform)"; \
-	  $(MAKE) -C "$(GOVARNAM_SRC)" library >/dev/null; \
-	  printf '#!/bin/sh\nfor a in "$$@"; do case "$$a" in --cflags) echo "-I%s";; --libs) echo "-L%s -lgovarnam";; esac; done\n' "$(GOVARNAM_SRC)" "$(GOVARNAM_SRC)" > $(VARNAM_DIR)/pkg-config-shim; \
-	  chmod +x $(VARNAM_DIR)/pkg-config-shim; \
-	  ( cd "$(GOVARNAM_SRC)" && PKG_CONFIG="$(VARNAM_DIR)/pkg-config-shim" go build -o "$(VARNAM_DIR)/varnamcli" ./cli ); \
-	  cp "$(GOVARNAM_SRC)"/libgovarnam.dylib "$(VARNAM_DIR)/" 2>/dev/null || cp "$(GOVARNAM_SRC)"/libgovarnam.so* "$(VARNAM_DIR)/"; \
-	fi
+	$(MAKE) -C "$(GOVARNAM_SRC)" library >/dev/null
+	@printf '#!/bin/sh\nfor a in "$$@"; do case "$$a" in --cflags) echo "-I%s";; --libs) echo "-L%s -lgovarnam";; esac; done\n' "$(GOVARNAM_SRC)" "$(GOVARNAM_SRC)" > $(VARNAM_DIR)/pkg-config-shim
+	@chmod +x $(VARNAM_DIR)/pkg-config-shim
+	cd "$(GOVARNAM_SRC)" && PKG_CONFIG="$(VARNAM_DIR)/pkg-config-shim" go build -o "$(VARNAM_DIR)/varnamcli" ./cli
+	@cp "$(GOVARNAM_SRC)"/libgovarnam.dylib "$(VARNAM_DIR)/" 2>/dev/null || cp "$(GOVARNAM_SRC)"/libgovarnam.so* "$(VARNAM_DIR)/"
+
+varnamcli: $(VARNAM_DIR)/varnamcli ## build the govarnam CLI + libgovarnam into tools/varnam/ (skipped if already built; delete to rebuild)
 	@echo "varnamcli ready in $(VARNAM_DIR)"
 
 dicttool: ## rebuild tools/dicttool_aosp.jar from the Indic Keyboard repo (maintenance)
@@ -74,8 +74,7 @@ schemes: ## fetch every varnam language's .vst from varnamproject/schemes
 prep-varnam: check-lang  # for a varnam LANG: ensure varnamcli is built and the .vst is fetched
 	@sid=$$($(PY) -c "import json;m=json.load(open('languages/$(LANG)/meta.json'));print(m.get('scheme_id','') if m.get('has_varnam') else '')"); \
 	if [ -n "$$sid" ]; then \
-	  test -x "$(VARNAM_DIR)/varnamcli" || { echo "varnamcli missing — run 'make varnamcli' first"; exit 1; }; \
-	  test -x "tools/reverse-translit/reverse-translit" || $(MAKE) --no-print-directory reverse-translit; \
+	  $(MAKE) --no-print-directory varnamcli reverse-translit; \
 	  [ -f "languages/$(LANG)/scheme/$$sid.vst" ] || $(MAKE) --no-print-directory scheme LANG=$(LANG); \
 	fi
 
@@ -93,7 +92,7 @@ combined: prep-varnam ## build/$(LANG)/$(LANG).combined (varnam langs: from the 
 dict: prep-varnam ## .combined -> build/$(LANG)/main_$(LANG).dict
 	$(VARNAM_ENV) $(PY) build.py dict $(LANG)
 
-varnam: prep-varnam ## learn/export govarnam packs for LANG (needs `make varnamcli`)
+varnam: prep-varnam ## learn/export govarnam packs for LANG
 	$(VARNAM_ENV) $(PY) build.py varnam $(LANG)
 
 pack: check-lang ## zip LANG's artifacts into dist/$(LANG).zip
@@ -108,15 +107,15 @@ index: ## aggregate dist/index.json from the per-language sidecars
 stats: ## per-language word/bigram/xlit counts and sizes of the built packs (from dist/)
 	$(PY) build.py stats
 
-reverse-translit: ## build tools/reverse-translit (romanizer for the xlit gesture dictionaries)
+tools/reverse-translit/reverse-translit: | govarnam-src
 	@command -v go >/dev/null || { echo "the go toolchain is required to build reverse-translit"; exit 1; }
-	@test -d "$(GOVARNAM_SRC)" || { echo "no govarnam source at $(GOVARNAM_SRC) (set INDIC_KEYBOARD_DIR)"; exit 1; }
 	cd tools/reverse-translit && CGO_ENABLED=1 go build -tags "fts5" -o reverse-translit .
+
+reverse-translit: tools/reverse-translit/reverse-translit ## build tools/reverse-translit (romanizer for the xlit gesture dictionaries; skipped if already built)
 	@echo "reverse-translit ready"
 
-prep-all:  # ensure varnamcli exists and every varnam language's .vst is fetched (missing ones only)
-	@test -x "$(VARNAM_DIR)/varnamcli" || $(MAKE) --no-print-directory varnamcli
-	@test -x "tools/reverse-translit/reverse-translit" || $(MAKE) --no-print-directory reverse-translit
+prep-all:  # ensure varnamcli + reverse-translit exist and every varnam language's .vst is fetched (missing ones only)
+	@$(MAKE) --no-print-directory varnamcli reverse-translit
 	@for l in $$($(PY) build.py langs --varnam); do \
 	  sid=$$($(PY) -c "import json;print(json.load(open('languages/$$l/meta.json')).get('scheme_id','$$l'))"); \
 	  [ -f "languages/$$l/scheme/$$sid.vst" ] || $(MAKE) --no-print-directory scheme LANG=$$l; \
