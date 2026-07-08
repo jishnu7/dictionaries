@@ -9,9 +9,10 @@
     "0B00-0B7F"
   ],
   "min_freq": 4,
-  "max_words": 50000,
+  "max_words": 70000,
   "scheme_id": "or",
   "packs": [
     "or-basic"
-  ]
+  ],
+  "max_bigrams": 150000
 }

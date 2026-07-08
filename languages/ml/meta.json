@@ -9,9 +9,10 @@
     "0D00-0D7F"
   ],
   "min_freq": 5,
-  "max_words": 250000,
+  "max_words": 290000,
   "scheme_id": "ml",
   "packs": [
     "ml-basic"
-  ]
+  ],
+  "max_bigrams": 250000
 }

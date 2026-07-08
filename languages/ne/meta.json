@@ -9,9 +9,10 @@
     "0900-097F"
   ],
   "min_freq": 4,
-  "max_words": 50000,
+  "max_words": 110000,
   "scheme_id": "ne",
   "packs": [
     "ne-basic"
-  ]
+  ],
+  "max_bigrams": 200000
 }

@@ -9,9 +9,10 @@
     "0900-097F"
   ],
   "min_freq": 5,
-  "max_words": 50000,
+  "max_words": 160000,
   "scheme_id": "mr",
   "packs": [
     "mr-basic"
-  ]
+  ],
+  "max_bigrams": 250000
 }

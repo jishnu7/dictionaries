@@ -9,9 +9,10 @@
     "0A80-0AFF"
   ],
   "min_freq": 4,
-  "max_words": 50000,
+  "max_words": 100000,
   "scheme_id": "gu",
   "packs": [
     "gu-basic"
-  ]
+  ],
+  "max_bigrams": 150000
 }

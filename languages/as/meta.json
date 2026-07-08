@@ -9,9 +9,10 @@
     "0980-09FF"
   ],
   "min_freq": 4,
-  "max_words": 50000,
+  "max_words": 130000,
   "scheme_id": "as",
   "packs": [
     "as-basic"
-  ]
+  ],
+  "max_bigrams": 250000
 }

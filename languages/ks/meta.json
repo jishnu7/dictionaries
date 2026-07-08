@@ -11,5 +11,6 @@
     "FB50-FDFF"
   ],
   "min_freq": 2,
-  "max_words": 20000
+  "max_words": 50000,
+  "max_bigrams": 100000
 }

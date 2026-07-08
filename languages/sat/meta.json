@@ -9,5 +9,6 @@
     "1C50-1C7F"
   ],
   "min_freq": 3,
-  "max_words": 50000
+  "max_words": 70000,
+  "max_bigrams": 200000
 }

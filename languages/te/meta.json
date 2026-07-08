@@ -9,9 +9,10 @@
     "0C00-0C7F"
   ],
   "min_freq": 5,
-  "max_words": 50000,
+  "max_words": 340000,
   "scheme_id": "te",
   "packs": [
     "te-basic"
-  ]
+  ],
+  "max_bigrams": 500000
 }
