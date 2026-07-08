@@ -13,7 +13,6 @@
 #
 # make dicttool rebuilds the committed tools/dicttool_aosp.jar from the keyboard repo (rare).
 
-VERSION           ?= 1
 BASE_URL          ?=
 GOVARNAM_VER      ?= v1.9.1
 SCHEMES_TAG       ?= v1.8.0
@@ -89,22 +88,22 @@ extract: check-lang ## dump -> languages/$(LANG)/{wordfreq,bigramfreq}.candidate
 	$(PY) tools/extract.py $(LANG)
 
 combined: prep-varnam ## build/$(LANG)/$(LANG).combined (varnam langs: from the sanitized .vlf)
-	$(VARNAM_ENV) $(PY) build.py --version $(VERSION) combined $(LANG)
+	$(VARNAM_ENV) $(PY) build.py combined $(LANG)
 
 dict: prep-varnam ## .combined -> build/$(LANG)/main_$(LANG).dict
-	$(VARNAM_ENV) $(PY) build.py --version $(VERSION) dict $(LANG)
+	$(VARNAM_ENV) $(PY) build.py dict $(LANG)
 
 varnam: prep-varnam ## learn/export govarnam packs for LANG (needs `make varnamcli`)
 	$(VARNAM_ENV) $(PY) build.py varnam $(LANG)
 
 pack: check-lang ## zip LANG's artifacts into dist/$(LANG).zip
-	$(PY) build.py --version $(VERSION) --base-url "$(BASE_URL)" pack $(LANG)
+	$(PY) build.py --base-url "$(BASE_URL)" pack $(LANG)
 
 lang: prep-varnam ## full chain for one LANG
-	$(VARNAM_ENV) $(PY) build.py --version $(VERSION) --base-url "$(BASE_URL)" lang $(LANG)
+	$(VARNAM_ENV) $(PY) build.py --base-url "$(BASE_URL)" lang $(LANG)
 
 index: ## aggregate dist/index.json from the per-language sidecars
-	$(PY) build.py --version $(VERSION) index
+	$(PY) build.py index
 
 stats: ## per-language word/bigram/xlit counts and sizes of the built packs (from dist/)
 	$(PY) build.py stats
@@ -124,4 +123,4 @@ prep-all:  # ensure varnamcli exists and every varnam language's .vst is fetched
 	done
 
 all: prep-all ## build every language + index.json (LANGS="ml hi" for a subset)
-	$(VARNAM_ENV) $(PY) build.py --version $(VERSION) --base-url "$(BASE_URL)" all $(if $(LANGS),--langs $(LANGS))
+	$(VARNAM_ENV) $(PY) build.py --base-url "$(BASE_URL)" all $(if $(LANGS),--langs $(LANGS))

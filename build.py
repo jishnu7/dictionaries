@@ -384,13 +384,15 @@ def build_pack(code, version, base_url):
     return entry
 
 
-def build_index(version):
+def build_index(version=None):
     """Aggregate the dist/<code>.json sidecars into dist/index.json."""
     schemes = []
     for sidecar in sorted(DIST.glob("*.json")):
         if sidecar.name == "index.json":
             continue
         schemes.append(json.loads(sidecar.read_text(encoding="utf-8")))
+    if version is None:
+        version = max((s.get("version", 1) for s in schemes), default=1)
     index = {"version": version, "schemes": schemes}
     (DIST / "index.json").write_text(json.dumps(index, indent=2, ensure_ascii=False),
                                      encoding="utf-8")
@@ -468,8 +470,9 @@ def print_stats():
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--version", type=int, default=1,
-                    help="data version stamped on packs (drives update detection)")
+    ap.add_argument("--version", type=int, default=None,
+                    help="override the data version stamped on packs (default: each "
+                         "language's meta.json version; drives update detection)")
     ap.add_argument("--base-url", default="",
                     help="base URL prepended to each zip's url field in index.json")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -490,18 +493,22 @@ def main():
         print(" ".join(codes))
         return
 
+    def version_for(code):
+        return args.version if args.version is not None \
+            else meta_of(code).get("version", 1)
+
     if args.cmd == "combined":
-        build_combined(args.code, args.version)
+        build_combined(args.code, version_for(args.code))
     elif args.cmd == "dict":
-        build_dict(args.code, args.version)
+        build_dict(args.code, version_for(args.code))
     elif args.cmd == "xlit":
-        build_xlit(args.code, args.version)
+        build_xlit(args.code, version_for(args.code))
     elif args.cmd == "varnam":
         build_varnam(args.code)
     elif args.cmd == "pack":
-        build_pack(args.code, args.version, args.base_url)
+        build_pack(args.code, version_for(args.code), args.base_url)
     elif args.cmd == "lang":
-        build_lang(args.code, args.version, args.base_url)
+        build_lang(args.code, version_for(args.code), args.base_url)
     elif args.cmd == "index":
         build_index(args.version)
     elif args.cmd == "stats":
@@ -511,7 +518,7 @@ def main():
             if not (LANGUAGES / code / "wordfreq.txt").exists():
                 print(f"{code}: no wordfreq.txt yet — skipping (run a crawl to seed it)")
                 continue
-            build_lang(code, args.version, args.base_url)
+            build_lang(code, version_for(code), args.base_url)
         build_index(args.version)
 
 
