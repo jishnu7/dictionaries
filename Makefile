@@ -86,8 +86,8 @@ download: check-lang ## fetch the Wikipedia dump for LANG
 extract: check-lang ## dump -> languages/$(LANG)/{wordfreq,bigramfreq}.candidate.txt
 	$(PY) tools/extract.py $(LANG)
 
-olam: check-lang ## Olam datasets (olam.in/p/open) -> languages/$(LANG)/lexicon.txt (ml only)
-	$(PY) tools/olam.py $(LANG)
+lexicon: check-lang ## open dictionary datasets -> languages/$(LANG)/lexicon.txt (ml: Olam, kn: Alar)
+	$(PY) tools/lexicon.py $(LANG)
 
 combined: prep-varnam ## build/$(LANG)/$(LANG).combined (varnam langs: from the sanitized .vlf)
 	$(VARNAM_ENV) $(PY) build.py combined $(LANG)
