@@ -117,6 +117,17 @@ def _clean_words(code, words):
             if base_count(w) >= MIN_BASES and (pat is None or pat.match(w))]
 
 
+LEXICON_F = 10
+
+
+def _lexicon_words(code, existing):
+    src = LANGUAGES / code / "lexicon.txt"
+    if not src.exists():
+        return []
+    words = [w for w in src.read_text(encoding="utf-8").split() if w not in existing]
+    return _clean_words(code, words)
+
+
 def _bigrams_for(code, words, weights):
     """Per-head next-word entries from languages/<code>/bigramfreq.txt, or {} if absent.
 
@@ -169,6 +180,10 @@ def build_combined(code, version):
     If languages/<code>/bigramfreq.txt exists (seeded by tools/extract.py from the same dump),
     each word also gets next-word `bigram=` entries, which is what the suggestion strip's
     next-word prediction runs on.
+
+    If languages/<code>/lexicon.txt exists (seeded by e.g. tools/olam.py), its words are
+    appended at LEXICON_F — below the ranked minimum of 15, so they are valid and completable
+    but never outrank a corpus-frequency word.
     """
     meta = meta_of(code)
     words = _words_from_vlf(code) if meta.get("has_varnam") else _words_from_wordfreq(code)
@@ -184,6 +199,7 @@ def build_combined(code, version):
     n = len(words)
     divider = n // 240 + 1
     weights = {w: min(254, (n - rank) // divider + 15) for rank, w in enumerate(words)}
+    lexicon = _lexicon_words(code, set(words))
     bigrams = _bigrams_for(code, words, weights)
     header = (f"dictionary=main:{code},locale={code},"
               f"description={meta['name']} wordlist. Author: Jishnu Mohan <jishnu7@gmail.com>,"
@@ -196,7 +212,10 @@ def build_combined(code, version):
             for i, target in enumerate(bigrams.get(word, ())):
                 f.write(f"  bigram={target},f={max(1, 200 - 8 * i)}\n")
                 ngram_count += 1
-    print(f"{code}: {n:,} words, {ngram_count:,} bigrams -> {out}")
+        for word in lexicon:
+            f.write(f" word={word},f={LEXICON_F}\n")
+    print(f"{code}: {n:,} ranked + {len(lexicon):,} lexicon words, "
+          f"{ngram_count:,} bigrams -> {out}")
     return out
 
 

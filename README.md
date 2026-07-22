@@ -18,6 +18,8 @@ languages/<code>/
   meta.json         # name, wiki code, has_varnam, script ranges, min_freq, max_words, packs
   wordfreq.txt      # canonical, curated "word count" list (the single source of truth)
   bigramfreq.txt    # optional "word1 word2 count" list -> next-word prediction bigrams
+  lexicon.txt       # optional bare-word list appended at a floor frequency (valid +
+                    # completable, never outranks corpus words); ml: seeded by tools/olam.py
   scheme/<code>.vst # varnam languages only — fetched from varnamproject/schemes, not committed
 build.py            # per-stage build orchestrator
 Makefile            # per-language entry points (see `make help`)
@@ -31,6 +33,7 @@ make varnamcli                 # download the govarnam CLI (once)
 make schemes                   # fetch varnam .vst files from varnamproject/schemes (once)
 make download LANG=ml          # fetch the Wikipedia dump
 make extract  LANG=ml          # dump -> languages/ml/wordfreq.candidate.txt (review, then commit)
+make olam     LANG=ml          # Olam datasets -> languages/ml/lexicon.txt (review, then commit)
 make lang     LANG=ml          # wordfreq.txt -> combined -> dict -> varnam -> dist/ml.zip
 make all                       # build every language + dist/index.json
 ```
@@ -65,6 +68,12 @@ Malayalam, Marathi, Nepali, Odia, Punjabi, Sanskrit, Santali, Sindhi, Tamil, Tel
 
 Varnam (`.vst` + `.vlf`): Assamese, Bengali, Gujarati, Hindi, Kannada, Malayalam, Marathi,
 Nepali, Odia, Punjabi, Sanskrit, Tamil, Telugu.
+
+Data attribution
+----------------
+`languages/ml/lexicon.txt` is derived from the [Olam open datasets](https://olam.in/p/open):
+the Datuk corpus (Open Data Commons Open Database License v1.0) and the E.K. Kurup corpus
+(CC BY-SA 4.0). The keyboard app surfaces both licenses on its About page.
 
 License
 --------
