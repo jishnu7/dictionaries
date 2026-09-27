@@ -2,8 +2,6 @@ name: Build and publish language packs
 
 # Builds every language artifact from the committed per-language sources in languages/ and
 # publishes <lang>.zip + index.json that Indic Keyboard's VarnamDownloadManager downloads.
-# The govarnam CLI is downloaded as a prebuilt binary; the dicttool jar is committed;
-# the reverse-translit tool is built from source.
 
 on:
   push:
@@ -29,6 +27,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          lfs: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -55,10 +56,13 @@ jobs:
             tools/reverse-translit/reverse-translit
           key: varnam-tools-${{ runner.os }}-${{ hashFiles('Makefile', 'tools/reverse-translit/*.go', 'tools/reverse-translit/go.*') }}
 
+      - name: Install the ruby ffi gem
+        run: sudo apt-get update && sudo apt-get install -y ruby-ffi
+
       - name: Build govarnam CLI + reverse-translit
         run: make varnamcli reverse-translit
 
-      - name: Fetch scheme VSTs from varnamproject/schemes
+      - name: Compile scheme VSTs from source
         run: make schemes
 
       - name: Resolve version and tag
