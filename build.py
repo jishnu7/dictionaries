@@ -47,7 +47,7 @@ REPO = Path(__file__).resolve().parent
 LANGUAGES = REPO / "languages"
 BUILD = REPO / "build"
 DIST = REPO / "dist"
-DICTTOOL_JAR = REPO / "tools" / "dicttool_aosp.jar"
+DICTTOOL_JAR = Path(os.environ.get("DICTTOOL_JAR") or REPO / "tools" / "dicttool_aosp.jar")
 EXPORT_WORDS_PER_FILE = 30000
 
 sys.path.insert(0, str(REPO / "tools"))
