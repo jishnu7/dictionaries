@@ -391,7 +391,7 @@ def build_pack(code, version, base_url):
             zf.write(m, arcname=m.name)
 
     entry = {
-        "id": code, "lang": code, "name": meta["name"],
+        "id": pack_id(code, meta), "lang": code, "script": script_tag(meta), "name": meta["name"],
         "has_varnam": bool(meta.get("has_varnam")),
         "file": zip_path.name, "size": zip_path.stat().st_size,
         "sha256": sha256_of(zip_path), "version": version, "contents": contents,
@@ -401,6 +401,29 @@ def build_pack(code, version, base_url):
     (DIST / f"{code}.json").write_text(json.dumps(entry, ensure_ascii=False), encoding="utf-8")
     print(f"{code}: {entry['size']:,} bytes  sha256={entry['sha256'][:12]}…  -> {zip_path}")
     return entry
+
+
+# ISO 15924 tags
+SCRIPT_TAGS = {
+    "Arabic": "Arab", "Bengali": "Beng", "Devanagari": "Deva", "Gujarati": "Gujr",
+    "Gurmukhi": "Guru", "Kaithi": "Kthi", "Kannada": "Knda", "Malayalam": "Mlym",
+    "Odia": "Orya", "Ol Chiki": "Olck", "Sharada": "Shrd", "Tamil": "Taml",
+    "Telugu": "Telu",
+}
+
+
+def script_tag(meta):
+    name = meta.get("script")
+    if not name:
+        return None
+    tag = SCRIPT_TAGS.get(name)
+    if tag is None:
+        raise SystemExit(f"unknown script {name!r}; add it to SCRIPT_TAGS")
+    return tag
+
+
+def pack_id(code, meta):
+    return f"{code}-{script_tag(meta)}" if meta.get("script_variant") else code
 
 
 def build_index(version=None):
